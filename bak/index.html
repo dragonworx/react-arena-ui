@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arena2d - Tests</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <!-- external libraries -->
+	<script type="text/javascript" src="js/lib/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="js/lib/arena-jquery.js"></script>
+	<script type="text/javascript" src="js/lib/arena-javascript.js"></script>
+	<script type="text/javascript" src="js/lib/arena-collections.js"></script>
+	<script type="text/javascript" src="js/lib/arena-value.js"></script>
+	<script type="text/javascript" src="js/lib/arena-object.js"></script>
+	<script type="text/javascript" src="js/lib/arena-oop.js"></script>
+	<!-- arena2d core libraries -->
+	<script type="text/javascript">console.group('Arena');</script>
+	<script type="text/javascript" src="js/arena/arena.js"></script>
+	<script type="text/javascript" src="js/arena/text.js"></script>
+	<script type="text/javascript" src="js/arena/geometry.js"></script>
+	<script type="text/javascript" src="js/arena/resource.js"></script>
+	<script type="text/javascript" src="js/arena/Object.js"></script>
+	<script type="text/javascript" src="js/arena/dom.js"></script>
+	<script type="text/javascript" src="js/arena/event/EventDispatcher.js"></script>
+	<script type="text/javascript" src="js/arena/display/Color.js"></script>
+	<script type="text/javascript" src="js/arena/display/Gradient.js"></script>
+	<script type="text/javascript" src="js/arena/display/LinearGradient.js"></script>
+	<script type="text/javascript" src="js/arena/display/RadialGradient.js"></script>
+	<script type="text/javascript" src="js/arena/display/Bitmap.js"></script>
+	<script type="text/javascript" src="js/arena/geometry/Point.js"></script>
+	<script type="text/javascript" src="js/arena/geometry/Pointer.js"></script>
+	<script type="text/javascript" src="js/arena/geometry/Line.js"></script>
+	<script type="text/javascript" src="js/arena/geometry/Rectangle.js"></script>
+	<script type="text/javascript" src="js/arena/geometry/Matrix.js"></script>
+	<script type="text/javascript" src="js/arena/geometry/Transform.js"></script>
+	<script type="text/javascript" src="js/arena/geometry/TransformStack.js"></script>
+	<script type="text/javascript" src="js/arena/geometry/QuadTree.js"></script>
+	<script type="text/javascript" src="js/arena/geometry/QuadNode.js"></script>
+	<script type="text/javascript" src="js/arena/resource/Pool.js"></script>
+	<script type="text/javascript" src="js/arena/resource/Url.js"></script>
+	<script type="text/javascript" src="js/arena/resource/Resource.js"></script>
+	<script type="text/javascript" src="js/arena/resource/Image.js"></script>
+	<!-- unit tests -->
+	<script type="text/javascript" src="js/arena/tests/UnitTest.js"></script>
+	<script type="text/javascript" src="js/arena/tests/Bitmap.js"></script>
+	<script type="text/javascript" src="js/arena/tests/Color.js"></script>
+	<script type="text/javascript" src="js/arena/tests/Rectangle.js"></script>
+	<script type="text/javascript" src="js/arena/tests/Transform.js"></script>
+	<script type="text/javascript" src="js/arena/tests/QuadTree.js"></script>
+	<!--<script type="text/javascript">Class.init(); console.log(Class.classes.count + " classes loaded."); console.groupEnd();</script>-->
+</head>
+<body>
+<div id="panel">
+    <fieldset>
+        <legend>Control</legend>
+        <div class="controlcontainer">
+            <button onclick="reset()"><img src="img/refresh.png"/>Reset</button>
+        </div>
+        <div class="controlcontainer">
+            <label id='_originx' for="originx" class="pos">origin.x: 0</label>
+            <input type="range" name="slider" id="originx" value="0.5" min="0" max="1" step="0.1"
+                   onchange="transform();setLabel(this)"/>
+        </div>
+        <div class="controlcontainer">
+            <label id='_originy' for="originy" class="pos">origin.y: 0</label>
+            <input type="range" name="slider" id="originy" value="0.5" min="0" max="1" step="0.1"
+                   onchange="transform();setLabel(this)"/>
+        </div>
+        <div class="controlcontainer">
+            <label id='_transx' for="transx" class="pos">trans.x: 0</label>
+            <input type="range" name="slider" id="transx" value="400" min="0" max="800" step="10"
+                   onchange="transform();setLabel(this)"/>
+        </div>
+        <div class="controlcontainer">
+            <label id='_transy' for="transy" class="pos">trans.y: 0</label>
+            <input type="range" name="slider" id="transy" value="400" min="0" max="800" step="10"
+                   onchange="transform();setLabel(this)"/>
+        </div>
+        <div class="controlcontainer">
+            <label id='_rotation' for="rotation" class="pos">rotation: 0</label>
+            <input type="range" name="slider" id="rotation" value="0" min="0" max="360" step="10"
+                   onchange="transform();setLabel(this)"/>
+        </div>
+        <div class="controlcontainer">
+            <label id='_scalex' for="scalex" class="posneg">scale.x: 1</label>
+            <input type="range" name="slider" id="scalex" value="1" min="-5" max="5" step="0.1"
+                   onchange="transform();setLabel(this)"/>
+        </div>
+        <div class="controlcontainer">
+            <label id='_scaley' for="scaley" class="posneg">scale.y: 1</label>
+            <input type="range" name="slider" id="scaley" value="1" min="-5" max="5" step="0.1"
+                   onchange="transform();setLabel(this)"/>
+        </div>
+        <div class="controlcontainer">
+            <label id='_skewx' for="skewx" class="posneg">skew.x: 0</label>
+            <input type="range" name="slider" id="skewx" value="0" min="-5" max="5" step="0.1"
+                   onchange="transform();setLabel(this)"/>
+        </div>
+        <div class="controlcontainer">
+            <label id='_skewy' for="skewy" class="posneg">skew.y: 0</label>
+            <input type="range" name="slider" id="skewy" value="0" min="-5" max="5" step="0.1"
+                   onchange="transform();setLabel(this)"/>
+        </div>
+        <div class="controlcontainer">
+            <label id='_squeeze' for="squeeze" class="posneg">squeeze: 0</label>
+            <input type="range" name="slider" id="squeeze" value="0" min="-1" max="1" step="0.1"
+                   onchange="transform();setLabel(this)"/>
+        </div>
+        <div class="controlcontainer">
+            <label id='_tiltx' for="tiltx" class="posneg">tilt.x: 1</label>
+            <input type="range" name="slider" id="tiltx" value="1" min="-1" max="1" step="0.1"
+                   onchange="transform();setLabel(this)"/>
+        </div>
+        <div class="controlcontainer">
+            <label id='_tilty' for="tilty" class="posneg">tilt.y: 1</label>
+            <input type="range" name="slider" id="tilty" value="1" min="-1" max="1" step="0.1"
+                   onchange="transform();setLabel(this)"/>
+        </div>
+        <div class="controlcontainer">
+            <label id='_quality' for="quality" class="pos">quality: 1</label>
+            <input type="range" name="slider" id="quality" value="1" min="0" max="1" step="0.1"
+                   onchange="transform();setLabel(this)"/>
+        </div>
+        <div class="controlcontainer">
+            <button onclick="update()"><img src="img/camera.png"/>Update</button>
+            <button onclick="start()"><img src="img/clock_run.png"/>Start</button>
+            <button onclick="stop()"><img src="img/clock_stop.png"/>Stop</button>
+        </div>
+    </fieldset>
+    <br/>
+    <fieldset>
+        <legend>Unit Tests</legend>
+        <ul>
+			<li><a href="javascript:test('Bitmap')"><img id="Bitmap" src="img/scroll.png"/>Bitmap</a></li>
+			<li><a href="javascript:test('Color')"><img id="Color" src="img/scroll.png"/>Color</a></li>
+			<li><a href="javascript:test('QuadTree')"><img id="QuadTree" src="img/scroll.png"/>QuadTree</a></li>
+			<li><a href="javascript:test('Rectangle')"><img id="Rectangle" src="img/scroll.png"/>Rectangle</a></li>
+			<li><a href="javascript:test('Transform')"><img id="Transform" src="img/scroll.png"/>Transform</a></li>
+        </ul>
+    </fieldset>
+</div>
+<div id="test">
+    <canvas id="canvas"></canvas>
+    <span id="info"></span>
+</div>
+<div id="overlay"></div>
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>

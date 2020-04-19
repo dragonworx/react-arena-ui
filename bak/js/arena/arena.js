@@ -1,0 +1,2 @@
+var arena = window.arena = {
+};
