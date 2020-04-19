@@ -1,2 +1,0 @@
-var arena = window.arena = {
-};

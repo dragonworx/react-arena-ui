@@ -8,13 +8,14 @@
   ],
   "types": "./dist/index.d.ts",
   "scripts": {
+    "clean": "/bin/rm -fdr ./dist",
     "start": "yarn web:dev",
     "web:dev": "parcel ./index.html -p 3000",
     "web:watch": "parcel watch ./index.html",
     "web:build": "parcel build ./index.html",
-    "build": "yarn build:lib && yarn build:types",
+    "build": "yarn clean && yarn build:lib && yarn build:types",
     "build:lib": "parcel build ./lib/index.ts",
-    "build:types": "/bin/rm -f ./types/* && ./node_modules/typescript/bin/tsc --declaration --emitDeclarationOnly --outDir ./dist --lib es2015,dom ./lib/index.ts "
+    "build:types": "./node_modules/typescript/bin/tsc --declaration --emitDeclarationOnly --outDir ./dist --lib es2015,dom ./lib/index.ts "
   },
   "devDependencies": {
     "less": "^3.11.1",
