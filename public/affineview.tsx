@@ -138,7 +138,6 @@ export function AffineView(props: AffineViewProps) {
          onKeyDown={onKeyDown}
          onKeyUp={onKeyUp}
          onWheel={onWheel}
-
       >
          <div ref={transformedDiv} className='transformed' style={transformedStyle}>
             {children}
