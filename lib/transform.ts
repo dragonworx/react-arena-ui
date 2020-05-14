@@ -12,7 +12,7 @@ export class Transform {
    tilt: Point = new Point(1, 1);
    squeeze: number = 1;
    alpha: number = 1;
-   matrix: Matrix = new Matrix();
+   matrix: DOMMatrix = new DOMMatrix();
 
    reset() {
       this.width = this.height = 0;
@@ -26,43 +26,52 @@ export class Transform {
       this.alpha = 1;
    }
 
-   build(premultiply?: Matrix, inverted: boolean = false) {
+   build(premultiply?: DOMMatrix) {
       if (premultiply)
-			this.matrix.concat(premultiply, inverted);
+			this.matrix.multiplySelf(premultiply);
 		else
-			this.matrix.reset();
+			this.matrix = new DOMMatrix();
 
-		if ((this.origin.x != 0) || (this.origin.y != 0))
-			this.matrix.translate((this.width * this.origin.x) * -1, (this.height * this.origin.y) * -1);
+         this.matrix.translateSelf((this.width * this.origin.x) * -1, (this.height * this.origin.y) * -1);
 
-		if (this.squeeze != 1)
-			this.matrix.squeeze(this.squeeze);
+		// if (this.squeeze != 1)
+		// 	this.matrix.squeeze(this.squeeze);
 
-		if ((this.skew.x != 0) || (this.skew.y != 0))
-			this.matrix.skew(this.skew.x, this.skew.y);
+      if (this.skew.x != 0) {
+         this.matrix.skewXSelf(this.skew.x);
+      }
 
-		if ((this.scale.x != 0) || (this.scale.y != 0))
-			this.matrix.scale(this.scale.x == 0 ? 0.001 : this.scale.x, this.scale.y == 0 ? 0.001 : this.scale.y);
+      if (this.skew.y != 0) {
+         this.matrix.skewYSelf(this.skew.y);
+      }
+
+		if (this.scale.x != 0 || this.scale.y != 0)
+			this.matrix.scaleSelf(this.scale.x == 0 ? 0.001 : this.scale.x, this.scale.y == 0 ? 0.001 : this.scale.y);
 
 		if (this.rotation % 360 != 0)
-			this.matrix.rotate(this.rotation);
+			this.matrix.rotateSelf(this.rotation);
 
-		if ((this.tilt.x != 1) || (this.tilt.y != 1))
-			this.matrix.scale(this.tilt.y == 0 ? 0.001 : this.tilt.y, this.tilt.x == 0 ? 0.001 : this.tilt.x);
+		if (this.tilt.x != 1 || this.tilt.y != 1)
+			this.matrix.scaleSelf(this.tilt.y == 0 ? 0.001 : this.tilt.y, this.tilt.x == 0 ? 0.001 : this.tilt.x);
 
 		if ((this.translation.x != 0) || (this.translation.y != 0))
-			this.matrix.translate(this.translation.y, this.translation.x);
-
-		this.matrix.alpha = this.alpha;
+			this.matrix.translateSelf(this.translation.x, this.translation.y);
 
 		return this.matrix;
    }
 
    localToGlobal(p: Point) {
-      return this.matrix.localToGlobal(p);
+      const lp = this.matrix.transformPoint(p);
+      return new Point(lp.x, lp.y);
    }
 
    globalToLocal(p: Point) {
-      return this.matrix.globalToLocal(p);
+      const gp = this.matrix.inverse().transformPoint(p);
+      return new Point(gp.x, gp.y);
+   }
+
+   toCssMatrix() {
+      const { a, b, c, d, e, f } = this.matrix;
+      return `matrix(${a},${b},${c},${d},${e},${f})`;
    }
 }
