@@ -11,13 +11,15 @@ export function App() {
          height={100}
          x={200}
          y={200}
-         rotation={100}
+         rotationX={15}
+         rotationY={15}
+         rotationZ={15}
          originX={0.5}
          originY={0}
-         scaleX={1.5}
+         scaleX={3}
          scaleY={2}
          skewX={0}
-         skewY={15}
+         skewY={0}
       >
          <Sprite
             className="sprite2"
@@ -25,7 +27,9 @@ export function App() {
             height={50}
             x={20}
             y={0}
-            rotation={15}
+            rotationX={45}
+            rotationY={45}
+            rotationZ={45}
             originX={0}
             originY={0}
             scaleX={1}

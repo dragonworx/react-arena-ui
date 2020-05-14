@@ -14,7 +14,9 @@ export interface SpriteProps {
    scaleY?: number;
    skewX?: number;
    skewY?: number;
-   rotation?: number;
+   rotationX?: number;
+   rotationY?: number;
+   rotationZ?: number;
    children: React.ReactNode;
 }
 
@@ -30,23 +32,26 @@ export function Sprite(props: SpriteProps) {
       scaleY: _scaleY = 1,
       skewX: _skewX = 0,
       skewY: _skewY = 0,
-      rotation: _rotation = 0,
+      rotationX: _rotationX = 0,
+      rotationY: _rotationY = 0,
+      rotationZ: _rotationZ = 0,
       children,
       className,
    } = props;
-   const debugRef = useRef(null);
    const spriteRef = useRef(null);
-   const [ x, setX ] = useState(_x);
-   const [ y, setY ] = useState(_y);
-   const [ originX, setOriginX ] = useState(_originX);
-   const [ originY, setOriginY ] = useState(_originY);
-   const [ width, setWidth ] = useState(_width);
-   const [ height, setHeight ] = useState(_height);
-   const [ scaleX, setScaleX ] = useState(_scaleX);
-   const [ scaleY, setScaleY ] = useState(_scaleY);
-   const [ skewX, setSkewX ] = useState(_skewX);
-   const [ skewY, setSkewY ] = useState(_skewY);
-   const [ rotation, setRotation ] = useState(_rotation);
+   const [x, setX] = useState(_x);
+   const [y, setY] = useState(_y);
+   const [originX, setOriginX] = useState(_originX);
+   const [originY, setOriginY] = useState(_originY);
+   const [width, setWidth] = useState(_width);
+   const [height, setHeight] = useState(_height);
+   const [scaleX, setScaleX] = useState(_scaleX);
+   const [scaleY, setScaleY] = useState(_scaleY);
+   const [skewX, setSkewX] = useState(_skewX);
+   const [skewY, setSkewY] = useState(_skewY);
+   const [rotationX, setRotationX] = useState(_rotationX);
+   const [rotationY, setRotationY] = useState(_rotationY);
+   const [rotationZ, setRotationZ] = useState(_rotationZ);
 
    const origX = width * originX;
    const origY = height * originY;
@@ -55,44 +60,59 @@ export function Sprite(props: SpriteProps) {
       width,
       height,
       transformOrigin: `${origX}px ${origY}px`,
-      transform: `translate(${x}px, ${y}px)  rotateZ(${rotation}deg) skew(${skewX}deg, ${skewY}deg) scale(${scaleX}, ${scaleY})`,
+      transform: `translate(${x}px, ${y}px) rotateZ(${rotationZ}deg)  scale(${scaleX}, ${scaleY})  skew(${skewX}deg, ${skewY}deg) rotateY(${rotationY}deg) rotateX(${rotationX}deg)  `,
    };
 
-   useEffect(() => {
-      const el = debugRef.current! as HTMLDivElement;
-      const rect = (spriteRef.current! as HTMLDivElement).getBoundingClientRect();
-      el.style.left = `${rect.left}px`;
-      el.style.top = `${rect.top}px`;
-      el.style.width = `${rect.width}px`;
-      el.style.height = `${rect.height}px`;
-      console.log(spriteRef.current!)
-   });
-
-   // useInterval(() => {
-   //    setRotation(rotation! + 1);
-   // }, 10);
+   useInterval(() => {
+      setRotationY(rotationY! + 1);
+   }, 1000);
 
    const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-      const { clientX, clientY, currentTarget } = e;
-      const r = currentTarget.getBoundingClientRect();
-      const x = clientX - r.left;
-      const y = clientY - r.top;
-      console.log(currentTarget.className, x, y);
+      // const mp = new Point(e.clientX, e.clientY);
+      // const local = transform.globalToLocal(mp);
+      // const global = transform.localToGlobal(local);
+      // console.log(mp, local, global);
+      const { x, y } = offsetXY(e, e.target);
+      console.log(width * x, height * y);
       e.stopPropagation();
    };
 
+   function offsetXY(event: any, element: any) {
+      function coords(element: any) {
+         var div = document.createElement('div'),
+            e = [], i;
+         div.style.display = 'none';
+         element.appendChild(div);
+         for (i = 0; i < 4; i++) {
+            div.style.cssText = 'display:block;width:0;height:0;position:absolute;left:' + (i % 3 ? 100 : 0) + '%;top:' + (i < 2 ? 0 : 100) + '%;';
+            e[i] = div.getBoundingClientRect();
+         }
+         element.removeChild(div);
+         return e;
+      }
+      var e = coords(element), a, d, c;
+      a = [
+         [e[3].top - e[0].top, e[0].top - e[1].top],
+         [e[0].left - e[3].left, e[1].left - e[0].left]
+      ];
+      d = (a[0][0] * a[1][1] - a[0][1] * a[1][0]);
+      c = [event.pageX - window.pageXOffset - e[0].left,
+      event.pageY - window.pageYOffset - e[0].top];
+      return {
+         x: (c[0] * a[0][0] + c[1] * a[1][0]) / d,
+         y: (c[0] * a[0][1] + c[1] * a[1][1]) / d
+      };
+   }
+
    return (
-      <>
-         <div className="debug" ref={debugRef}></div>
-         <div
-            ref={spriteRef}
-            className={`sprite${className ? ` ${className}` : ''}`}
-            style={style}
-            onMouseMove={onMouseMove}
-         >
-            { children }
-            <div className="origin" style={{left: origX, top: origY}}></div>
-         </div>
-      </>
+      <div
+         ref={spriteRef}
+         className={`sprite${className ? ` ${className}` : ''}`}
+         style={style}
+         onMouseMove={onMouseMove}
+      >
+         {children}
+         <div className="origin" style={{ left: origX, top: origY }}></div>
+      </div>
    )
 }
