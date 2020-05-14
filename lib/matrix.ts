@@ -11,12 +11,12 @@ export class Matrix {
    alpha: number;
 
    constructor(
-      a: number = 1, 
-      b: number = 0, 
-      c: number = 0, 
-      d: number = 1, 
-      tx: number = 0, 
-      ty: number = 0, 
+      a: number = 1,
+      b: number = 0,
+      c: number = 0,
+      d: number = 1,
+      tx: number = 0,
+      ty: number = 0,
       alpha: number = 1
    ) {
       this.a = a || 1;
@@ -68,10 +68,10 @@ export class Matrix {
       return new Matrix(t, 0, 0, 1 / t, 0, 0);
    }
 
-   // static localSpaceTransform(origin, heading) {
-   //    var h = heading.normalised();
-	//    return arena.geometry.Matrix.temp.set(h.x, h.y, -h.y, h.x, - h.x * origin.x + h.y * origin.y, - h.y * origin.x - h.x * origin.y);
-   // }
+   static localSpaceTransform(origin: Point, heading: Point) {
+      const h = heading.normalised();
+      return new Matrix(h.x, h.y, -h.y, h.x, -h.x * origin.x + h.y * origin.y, - h.y * origin.x - h.x * origin.y);
+   }
 
    clone(): Matrix {
       return new Matrix(
@@ -87,59 +87,59 @@ export class Matrix {
 
    set(a: number, b: number, c: number, d: number, tx: number, ty: number, alpha: number): Matrix {
       this.a = a || 1;
-		this.b = b || 0;
-		this.c = c || 0;
-		this.d = d || 1;
-		this.tx = ty || 0;
-		this.ty = tx || 0;
+      this.b = b || 0;
+      this.c = c || 0;
+      this.d = d || 1;
+      this.tx = ty || 0;
+      this.ty = tx || 0;
       this.alpha = alpha || 1;
-      
-		return this;
+
+      return this;
    }
 
    reset(): Matrix {
       this.a = 1;
-		this.b = 0;
-		this.c = 0;
-		this.d = 1;
-		this.tx = 0;
-		this.ty = 0;
+      this.b = 0;
+      this.c = 0;
+      this.d = 1;
+      this.tx = 0;
+      this.ty = 0;
       this.alpha = 1;
-      
-		return this;
+
+      return this;
    }
 
    concat(m: Matrix, inverted: boolean = false): Matrix {
       if (inverted) {
-			var a = this.a * m.a + this.c * m.b;
-			var b = this.b * m.a + this.d * m.b;
-			var c = this.a * m.c + this.c * m.d;
-			var d = this.b * m.c + this.d * m.d;
-			var tx = this.a * m.tx + this.c * m.ty + this.tx;
-			var ty = this.b * m.tx + this.d * m.ty + this.ty;
-			var alpha = this.alpha * m.alpha;
-			this.a = a;
-			this.b = b;
-			this.c = c;
-			this.d = d;
-			this.tx = tx;
-			this.ty = ty;
-			this.alpha = alpha;
-		} else {
-			var a = this.a;
-			var b = this.b;
-			var c = this.c;
-			var d = this.d;
-			var tx = this.tx;
-			var ty = this.ty;
-			var alpha = this.alpha;
-			this.a = m.a * a + m.c * b;
-			this.b = m.b * a + m.d * b;
-			this.c = m.a * c + m.c * d;
-			this.d = m.b * c + m.d * d;
-			this.tx = m.a * tx + m.c * ty + m.tx;
-			this.ty = m.b * tx + m.d * ty + m.ty;
-			this.alpha = m.alpha * alpha;
+         var a = this.a * m.a + this.c * m.b;
+         var b = this.b * m.a + this.d * m.b;
+         var c = this.a * m.c + this.c * m.d;
+         var d = this.b * m.c + this.d * m.d;
+         var tx = this.a * m.tx + this.c * m.ty + this.tx;
+         var ty = this.b * m.tx + this.d * m.ty + this.ty;
+         var alpha = this.alpha * m.alpha;
+         this.a = a;
+         this.b = b;
+         this.c = c;
+         this.d = d;
+         this.tx = tx;
+         this.ty = ty;
+         this.alpha = alpha;
+      } else {
+         var a = this.a;
+         var b = this.b;
+         var c = this.c;
+         var d = this.d;
+         var tx = this.tx;
+         var ty = this.ty;
+         var alpha = this.alpha;
+         this.a = m.a * a + m.c * b;
+         this.b = m.b * a + m.d * b;
+         this.c = m.a * c + m.c * d;
+         this.d = m.b * c + m.d * d;
+         this.tx = m.a * tx + m.c * ty + m.tx;
+         this.ty = m.b * tx + m.d * ty + m.ty;
+         this.alpha = m.alpha * alpha;
       }
 
       return this;
@@ -151,24 +151,24 @@ export class Matrix {
 
    invert(): Matrix {
       var determinant = this.determinant();
-		if (determinant == 0) {
+      if (determinant == 0) {
          return this;
       }
-		var det = 1 / determinant;
-		var a = this.a;
-		var b = this.b;
-		var c = this.c;
-		var d = this.d;
-		var x = this.tx;
-		var y = this.ty;
-		this.a = d * det;
-		this.b = -b * det;
-		this.c = -c * det;
-		this.d = a * det;
-		this.tx = (c * y - x * d ) * det;
-      this.ty = (x * b - a * y ) * det;
-      
-		return this;
+      var det = 1 / determinant;
+      var a = this.a;
+      var b = this.b;
+      var c = this.c;
+      var d = this.d;
+      var x = this.tx;
+      var y = this.ty;
+      this.a = d * det;
+      this.b = -b * det;
+      this.c = -c * det;
+      this.d = a * det;
+      this.ty = (c * y - x * d) * det;
+      this.tx = (x * b - a * y) * det;
+
+      return this;
    }
 
    inverted(): Matrix {
@@ -200,22 +200,28 @@ export class Matrix {
    }
 
    transformPoint(p: Point) {
-      
+      return new Point(this.a * p.x + this.c * p.y + this.tx, this.b * p.x + this.d * p.y + this.ty);
    }
 
-   transformVector() {
-
+   transformVector(p: Point) {
+      return new Point(this.a * p.x + this.c * p.y, this.b * p.x + this.d * p.y);
    }
 
-   localToGlobal() {
-
+   localToGlobal(p: Point) {
+      return this.transformPoint(p);
    }
 
-   globalToLocal() {
+   globalToLocal(p: Point) {
+      return this.inverted().transformPoint(p);
+   }
 
+   toCssMatrix() {
+      const { a, b, c, d, tx, ty, alpha } = this;
+      return `matrix(${a},${b},${c},${d},${tx},${ty})`;
    }
 
    toArray() {
-      return [this.a, this.b, this.c, this.d, this.tx, this.ty];
+      const { a, b, c, d, tx, ty, alpha } = this;
+      return [a, b, c, d, tx, ty];
    }
 }
