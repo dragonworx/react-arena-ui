@@ -1,0 +1,26 @@
+@import (reference) './common.less';
+
+.a2d-flex {
+   .a2d();
+   display: flex;
+}
+
+.a2d-flex.horiz.padded {
+   > * {
+      margin-right: @padding;
+   }
+
+   > *:last-child {
+      margin-right: unset;
+   }
+}
+
+.a2d-flex.vert.padded {
+   > * {
+      margin-bottom: @padding;
+   }
+
+   > *:last-child {
+      margin-bottom: unset;
+   }
+}

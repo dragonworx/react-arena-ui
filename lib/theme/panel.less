@@ -1,0 +1,20 @@
+@import (reference) './common.less';
+
+.a2d-panel {
+   .a2d();
+   border-radius: @panel-radius;
+   border-top-color: lighten(@border-color-medium, 5%);
+   border-left-color: lighten(@border-color-medium, 0%);
+   border-right-color: darken(@border-color-medium, 5%);
+   border-bottom-color: darken(@border-color-medium, 10%);
+   padding: @padding;
+   padding-top: @padding / 2;
+   background-color: lighten(@background-color, 3%);
+   margin: 0;
+
+   legend {
+      color: @text-color-strong;
+      font-weight: bold;
+      font-size: 10pt;
+   }
+}

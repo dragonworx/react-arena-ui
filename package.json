@@ -1,0 +1,33 @@
+{
+  "name": "arena2d",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "files": [ 
+      "./dist/index.js"
+  ],
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "clean": "/bin/rm -fdr ./dist",
+    "start": "yarn web:dev",
+    "web:dev": "parcel ./index.html -p 3000",
+    "web:watch": "parcel watch ./index.html",
+    "web:build": "parcel build ./index.html",
+    "build": "yarn clean && yarn build:lib && yarn build:types",
+    "build:lib": "parcel build ./lib/index.ts",
+    "build:types": "./node_modules/typescript/bin/tsc --declaration --emitDeclarationOnly --outDir ./dist --lib es2015,dom ./lib/index.ts "
+  },
+  "devDependencies": {
+    "less": "^3.11.1",
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@types/react": "^16.9.25",
+    "@types/react-dom": "^16.9.5",
+    "dist": "^0.1.2",
+    "lib": "^4.1.2",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  }
+}
