@@ -1,45 +1,42 @@
 import * as React from 'react';
-import { Sprite } from './sprite';
+import { useState } from 'react';
+import { LayoutExamples } from './examples/layout';
+import { PanelExamples } from './examples/panel';
+import { ButtonExamples } from './examples/button';
 import './app.less';
 
-export function App() {
+const Routes = {
+   'layout': LayoutExamples,
+   'panel': PanelExamples,
+   'button': ButtonExamples,
+} as any;
 
+export function App() {
+   const [ route, setRoute ] = useState(window.location.hash.replace('#', ''));
+
+   const content = () => {
+      if (route) {
+         const El = Routes[route];
+         return <El />;
+      }
+      return <p>Select an example</p>;
+   };
+
+   const onRoute = (routeValue: string) => () => setRoute(routeValue);
+   const link = (route: string) => <li><a href={`#${route}`} onClick={onRoute(`${route}`)}>{route}</a></li>;
 
    return (
-      <Sprite
-         width={100}
-         height={100}
-         x={200}
-         y={200}
-         rotationX={15}
-         rotationY={15}
-         rotationZ={15}
-         originX={0.5}
-         originY={0}
-         scaleX={3}
-         scaleY={2}
-         skewX={0}
-         skewY={0}
-      >
-         <Sprite
-            className="sprite2"
-            width={50}
-            height={50}
-            x={20}
-            y={0}
-            rotationX={45}
-            rotationY={45}
-            rotationZ={45}
-            originX={0}
-            originY={0}
-            scaleX={1}
-            scaleY={1}
-            skewX={0}
-            skewY={0}
-         >
-            <input style={{width:30}} />
-            <input type="checkbox" />
-         </Sprite>
-      </Sprite>
+      <div id="app">
+         <header>Arena2D UI Component Library - Examples</header>
+         <div id="examples">
+            <ul id="menu">
+               {
+                  Object.keys(Routes).map(route => link(route))
+               }
+            </ul>
+            <div id="content">{content()}</div>
+         </div>
+         <footer>&copy; 2020 Ali Chamas</footer>
+      </div>
    )
 }

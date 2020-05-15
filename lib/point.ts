@@ -1,4 +1,4 @@
-import { radians, distance, angle } from './util';
+import { radians, distance, angle } from './geom';
 
 export class Point {
    x: number;

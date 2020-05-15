@@ -1,4 +1,4 @@
-import { radians } from './util';
+import { radians } from './geom';
 import { Point } from './point';
 
 export class Matrix {
