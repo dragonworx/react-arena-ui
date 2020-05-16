@@ -28,7 +28,7 @@ export function Flex(props: FlexProps) {
    const {
       children,
       padded,
-      direction,
+      direction = 'horizontal',
       wrap,
       justify,
       align,
@@ -43,5 +43,5 @@ export function Flex(props: FlexProps) {
       alignContent: content,
    };
 
-   return <div className={`a2d-flex${padded ? ' padded' : ''} ${(direction === 'horizontal' || direction === 'horizontal-reverse' || !direction) ? 'horiz' : 'vert'}`} style={style}>{ children }</div>
+   return <div className={`a2d-flex${padded ? ' padded' : ''} ${direction}`} style={style}>{ children }</div>
 }

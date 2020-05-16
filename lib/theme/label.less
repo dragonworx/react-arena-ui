@@ -11,11 +11,11 @@
       justify-content: center;
       font-size: @text-font-size-small;
       text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-      margin: @padding / 2;
+      margin: @padding * 0.9;
    }
 }
 
-.a2d-flex.horiz {
+.a2d-flex.horizontal, .a2d-flex.horizontal-reverse {
    > .a2d-label-text.near {
       margin-top: 0;
       align-self: flex-start;
@@ -26,7 +26,7 @@
    }
 }
 
-.a2d-flex.vert {
+.a2d-flex.vertical, .a2d-flex.vertical-reverse {
    > .a2d-label-text.near {
       margin-left: 0;
       align-self: flex-start;
