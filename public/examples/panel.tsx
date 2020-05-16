@@ -1,17 +1,20 @@
 import * as React from 'react';
 import { Panel } from '~lib';
+import { BoxMedium } from './box';
 
 export function PanelExamples() {
    return (
       <ul>
          <li>
             <label>Default</label>
-            <Panel />
+            <Panel>
+               <BoxMedium />
+            </Panel>
          </li>
          <li>
             <label>With Title &amp; Content</label>
             <Panel title="Panel Title">
-               Panel contents...
+               <BoxMedium />
             </Panel>
          </li>
       </ul>

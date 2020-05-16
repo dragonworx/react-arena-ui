@@ -1,7 +1,7 @@
-@import (reference) './common.less';
+@import './common.less';
 
 .a2d-flex {
-   .a2d();
+   .common();
    display: flex;
 }
 
@@ -9,18 +9,10 @@
    > * {
       margin-right: @padding;
    }
-
-   > *:last-child {
-      margin-right: unset;
-   }
 }
 
 .a2d-flex.vert.padded {
    > * {
       margin-bottom: @padding;
-   }
-
-   > *:last-child {
-      margin-bottom: unset;
    }
 }

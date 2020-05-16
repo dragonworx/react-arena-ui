@@ -10,7 +10,7 @@ export function Panel(props: PanelProps) {
    const { title, children } = props;
 
    return (
-      <fieldset className="a2d a2d-panel">
+      <fieldset className="a2d-panel">
          { title ? <legend>{ title }</legend> : null }
          { children }
       </fieldset>

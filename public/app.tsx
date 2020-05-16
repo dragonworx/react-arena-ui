@@ -2,28 +2,30 @@ import * as React from 'react';
 import { useState } from 'react';
 import { LayoutExamples } from './examples/layout';
 import { PanelExamples } from './examples/panel';
+import { LabelExamples } from './examples/label';
 import { ButtonExamples } from './examples/button';
 import './app.less';
 
 const Routes = {
    'layout': LayoutExamples,
    'panel': PanelExamples,
+   'label': LabelExamples,
    'button': ButtonExamples,
 } as any;
 
 export function App() {
-   const [ route, setRoute ] = useState(window.location.hash.replace('#', ''));
+   const [ selectedRoute, stSelectedRoute ] = useState(window.location.hash.replace('#', ''));
 
    const content = () => {
-      if (route) {
-         const El = Routes[route];
+      if (selectedRoute) {
+         const El = Routes[selectedRoute];
          return <El />;
       }
       return <p>Select an example</p>;
    };
 
-   const onRoute = (routeValue: string) => () => setRoute(routeValue);
-   const link = (route: string) => <li><a href={`#${route}`} onClick={onRoute(`${route}`)}>{route}</a></li>;
+   const onRoute = (routeValue: string) => () => stSelectedRoute(routeValue);
+   const link = (route: string) => <li key={`route-${route}`}><a href={`#${route}`} data-selected={route === selectedRoute} onClick={onRoute(`${route}`)}>{route}</a></li>;
 
    return (
       <div id="app">

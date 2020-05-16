@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { ReactNode } from 'react';
 
 export interface Props {
-
+   children?: ReactNode;
 }
 
 export function Component(props: Props) {
-   const {} = props;
-   const [value, setValue] = useState();
+   const { children } = props;
 
    return (
       <p></p>

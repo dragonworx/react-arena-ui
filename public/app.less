@@ -1,4 +1,4 @@
-@import (reference) '../lib/theme/index.less';
+@import  '../lib/theme/index.less';
 
 body {
    margin: 0;
@@ -87,9 +87,15 @@ body {
          display: block;
          text-align: center;
          border-radius: @padding / 2;
+         border-right: 5px solid white;
 
          &:hover {
             background-color: rgba(255,255,255,0.1);
+         }
+
+         &[data-selected="true"] {
+            border-right: 5px solid cyan;
+            background-color: rgba(0, 231, 255, 0.22);
          }
       }
    }
@@ -111,10 +117,14 @@ body {
          margin-bottom: @padding * 2;
 
          label {
-            color: #ccc;
+            color: #b2d4dc;
             text-shadow: 0 3px 2px rgba(0,0,0,0.3);
             margin-bottom: @padding;
             display: block;
+            background-color: rgba(135, 191, 204, 0.1);
+            padding: 3px 7px;
+            border-radius: 5px;
+            border-bottom: 1px solid #2af5ff;
          }
 
          label:after {
@@ -124,8 +134,24 @@ body {
    }
 
    .box {
-      background: url('img/grid.png');
+      background: url('img/sample.png');
+      background-size: cover;
+      border: 1px solid white;
+      box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
+   }
+
+   .box.small {
+      width: 25px;
+      height: 25px;
+   }
+
+   .box.medium {
       width: 50px;
       height: 50px;
+   }
+
+   .box.large {
+      width: 80px;
+      height: 80px;
    }
 }
