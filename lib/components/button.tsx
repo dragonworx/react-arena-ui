@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { ReactNode } from 'react';
 
 export interface ButtonProps {
-
+   children?: ReactNode;
+   text?: string;
 }
 
 export function Button(props: ButtonProps) {
-   const [value, setValue] = useState();
+   const { children, text } = props;
 
    return (
-      <p></p>
+      <div className="a2d-button">{text}</div>
    )
 }
