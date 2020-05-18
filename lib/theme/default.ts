@@ -21,6 +21,7 @@ export const defaultTheme: Theme = {
    textColorLight: textColor.lighten(0.5).hex(),
    textColor: textColor.hex(),
    textColorDark: textColor.darken(0.5).hex(),
+   fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
    fontSizeSmall: Math.round(fontSize * 0.8),
    fontSize: fontSize,
    fontSizeLarge: Math.round(fontSize * 1.75),

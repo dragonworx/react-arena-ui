@@ -12,6 +12,7 @@ export interface Theme {
    textColorLight: string;
    textColor: string;
    textColorDark: string;
+   fontFamily: string;
    fontSizeSmall: number;
    fontSize: number;
    fontSizeLarge: number;

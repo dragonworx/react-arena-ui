@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
+import { Theme, createUseStyles } from '~lib';
 
 export interface PanelProps {
    title?: string;
@@ -9,10 +10,32 @@ export interface PanelProps {
 export function Panel(props: PanelProps) {
    const { title, children } = props;
 
+   const classes = useStyles();
+
    return (
-      <fieldset className="a2d-panel">
+      <fieldset className={classes.panel}>
          { title ? <legend>{ title }</legend> : null }
          { children }
       </fieldset>
    )
 }
+
+const useStyles = createUseStyles((theme: Theme) => ({
+   'panel': {
+      borderRadius: theme.borderRadius,
+      borderColor: theme.borderColor,
+      borderWidth: 1,
+      borderStyle: 'outset',
+      padding: theme.padding,
+      paddingTop: theme.padding * 0.8,
+      paddingBottom: theme.padding * 1.2,
+      backgroundColor: theme.backgroundColorLight,
+      margin: 0,
+
+      '& legend': {
+         color: theme.textColorLight,
+         fontWeight: 'bold',
+         fontSize: theme.fontSizeSmall,
+      },
+   }
+}));

@@ -60,7 +60,6 @@ const useStyles = createUseStyles((theme: Theme) => ({
       'body': {
          margin: 0,
          backgroundColor: theme.backgroundColorLight,
-         fontFamily: `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`,
          '& *': {
             boxSizing: 'border-box',
          }
@@ -109,6 +108,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
          fontSize: theme.fontSizeLarge,
          color: '#ccc',
          fontWeight: 'bold',
+         fontFamily: theme.fontFamily,
          textShadow: '0 3px 4px rgba(0,0,0,0.3)',
       },
       '& footer': {
@@ -153,6 +153,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
             borderRadius: theme.padding / 2,
             borderRight: '5px solid white',
             fontSize: theme.fontSize,
+            fontFamily: theme.fontFamily,
 
             '&:hover': {
                backgroundColor: theme.backgroundColorLight,
@@ -181,6 +182,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
             marginBottom: theme.padding * 2,
 
             '& label': {
+               fontFamily: theme.fontFamily,
                color: '#b2d4dc',
                textShadow: '0 3px 2px rgba(0,0,0,0.3)',
                marginBottom: theme.padding,
