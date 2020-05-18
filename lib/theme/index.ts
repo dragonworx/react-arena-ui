@@ -19,6 +19,7 @@ export interface Theme {
 }
 
 export * from './default';
+export * from './test';
 
 export { ThemeProvider, createUseStyles, useTheme } from 'react-jss';
 

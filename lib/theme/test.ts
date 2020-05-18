@@ -1,14 +1,14 @@
 import { Theme } from './index';
 import Color from 'color';
 
-const backgroundColor = Color('#777');
+const backgroundColor = Color('#333');
 const borderRadius = 5;
 const borderColor = Color.rgb(167, 167, 167);
-const textColor = Color.rgb(167, 167, 167);
+const textColor = Color('#666');
 const fontSize = 14;
-const padding = 10;
+const padding = 5;
 
-export const defaultTheme: Theme = {
+export const testTheme: Theme = {
    backgroundColorLight: backgroundColor.lighten(0.1).hex(),
    backgroundColor: backgroundColor.hex(),
    backgroundColorDark: backgroundColor.darken(0.2).hex(),
