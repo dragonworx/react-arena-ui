@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
+import { Theme, createUseStyles, useTheme } from '~lib';
 
 export interface FlexProps {
    children?: ReactNode;
@@ -11,37 +12,64 @@ export interface FlexProps {
    content?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'stretch' | 'baseline' | 'safe' | 'unsafe';
 }
 
+interface Lookup {
+   [key: string]: string;
+}
+
 const directionPropToFlexDirection = {
    'horizontal': 'row',
    'horizontal-reverse': 'row-reverse',
    'vertical': 'column',
    'vertical-reverse': 'column-reverse',
-} as any;
+} as Lookup;
 
 const propToFlexValue = {
    'near': 'flex-start',
    'center': 'center',
    'far': 'flex-end',
-} as any;
+} as Lookup;
+
+const directionPropToMargin = {
+   'horizontal': 'marginRight',
+   'horizontal-reverse': 'marginLeft',
+   'vertical': 'marginBottom',
+   'vertical-reverse': 'marginTop',
+} as Lookup;
 
 export function Flex(props: FlexProps) {
    const {
       children,
       padded,
-      direction = 'horizontal',
-      wrap,
-      justify,
-      align,
-      content,
    } = props;
 
-   const style = {
-      flexDirection: direction ? directionPropToFlexDirection[direction] : undefined,
-      flexWrap: wrap,
-      justifyContent: justify ? propToFlexValue[justify] : undefined,
-      alignItems: align ? propToFlexValue[align] : undefined,
-      alignContent: content,
-   };
+   const theme = useTheme();
+   const classes = useStyles({ ...props, theme });
 
-   return <div className={`a2d-flex${padded ? ' padded' : ''} ${direction}`} style={style}>{ children }</div>
+   return <div className={classes.flex}>{ children }</div>
 }
+
+const useStyles = createUseStyles((theme: Theme) => ({
+   'flex': (props: FlexProps) => {
+      let style = {
+         display: 'flex',
+         flexDirection: props.direction ? directionPropToFlexDirection[props.direction] : undefined,
+         flexWrap: props.wrap,
+         justifyContent: props.justify ? propToFlexValue[props.justify] : undefined,
+         alignItems: props.align ? propToFlexValue[props.align] : undefined,
+         alignContent: props.content,
+      } as any;
+      if (props.padded) {
+         const marginKey = directionPropToMargin[props.direction || 'horizontal'];
+         style = {
+            ...style,
+            '& > *': {
+               [marginKey]: theme.padding,
+            },
+            '& > :last-child': {
+               [marginKey]: 0,
+            }
+         }
+      }
+      return style;
+   }
+}));

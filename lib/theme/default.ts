@@ -1,4 +1,4 @@
-import { ArenaTheme } from './index';
+import { Theme } from './index';
 import Color from 'color';
 
 const backgroundColor = Color('#777');
@@ -7,7 +7,7 @@ const borderColor = Color.rgb(167, 167, 167);
 const textColor = Color.rgb(167, 167, 167);
 const fontSize = 14;
 
-export const defaultTheme: ArenaTheme = {
+export const defaultTheme: Theme = {
    backgroundColorLight: backgroundColor.lighten(0.1).hex(),
    backgroundColor: backgroundColor.hex(),
    backgroundColorDark: backgroundColor.darken(0.2).hex(),

@@ -1,4 +1,4 @@
-export interface ArenaTheme {
+export interface Theme {
    backgroundColorLight: string;
    backgroundColor: string;
    backgroundColorDark: string;
@@ -17,9 +17,8 @@ export interface ArenaTheme {
    fontSizeLarge: number;
 }
 
-export interface Theme {
-   theme: ArenaTheme;
-}
-
 export * from './default';
-export * from './theming';
+
+export { ThemeProvider, createUseStyles, useTheme } from 'react-jss';
+
+export const css = (...classNames: (string | undefined)[]) => classNames.filter(className => !!className).join(' ');

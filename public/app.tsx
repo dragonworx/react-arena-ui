@@ -4,9 +4,9 @@ import { LayoutExamples } from './examples/layout';
 import { PanelExamples } from './examples/panel';
 import { LabelExamples } from './examples/label';
 import { ButtonExamples } from './examples/button';
-import { ArenaTheme } from '~lib';
-import { createUseStyles, useTheme } from 'react-jss'
-import sample from './img/sample.png';
+import { Theme, createUseStyles, useTheme } from '~lib';
+
+const sample = require('./img/sample.png');
 
 const Routes = {
    'layout': LayoutExamples,
@@ -17,7 +17,7 @@ const Routes = {
 
 export function App() {
    const [selectedRoute, stSelectedRoute] = useState(window.location.hash.replace('#', ''));
-   const theme = useTheme()
+   const theme = useTheme();
    const classes = useStyles({ theme });
 
    const content = () => {
@@ -49,7 +49,7 @@ export function App() {
 
 const HeaderSize = 50;
 
-const useStyles = createUseStyles((theme: ArenaTheme) => ({
+const useStyles = createUseStyles((theme: Theme) => ({
    'panel': {
       padding: theme.padding,
       border: '1px solid rgb(77, 77, 77)',

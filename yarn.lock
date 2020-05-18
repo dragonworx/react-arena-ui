@@ -889,6 +889,11 @@
   dependencies:
     "@types/color-convert" "*"
 
+"@types/node@^14.0.1":
+  version "14.0.1"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/@types/node/-/node-14.0.1.tgz#5d93e0a099cd0acd5ef3d5bde3c086e1f49ff68c"
+  integrity sha1-XZPgoJnNCs1e89W948CG4fSf9ow=
+
 "@types/prop-types@*":
   version "15.7.3"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
@@ -2704,6 +2709,11 @@ image-size@~0.5.0:
   version "0.5.5"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/image-size/-/image-size-0.5.5.tgz#09dfd4ab9d20e29eb1c3e80b8990378df9e3cb9c"
   integrity sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=
+
+img@^3.0.3:
+  version "3.0.3"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/img/-/img-3.0.3.tgz#9650f00b43d52c4d330f074094a007b061acf3d4"
+  integrity sha1-llDwC0PVLE0zDwdAlKAHsGGs89Q=
 
 import-fresh@^2.0.0:
   version "2.0.0"
