@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
-import { Theme, createUseStyles, useTheme } from '~lib';
+import { Theme, createUseStyles } from '~lib';
 
-export interface FlexProps {
+export interface LayoutProps {
    children?: ReactNode;
    padded?: boolean;
    direction?: 'horizontal' | 'horizontal-reverse' | 'vertical' | 'vertical-reverse';
@@ -36,20 +36,16 @@ const directionPropToMargin = {
    'vertical-reverse': 'marginTop',
 } as Lookup;
 
-export function Flex(props: FlexProps) {
-   const {
-      children,
-      padded,
-   } = props;
+export function Layout(props: LayoutProps) {
+   const { children, direction = 'horizontal' } = props;
 
-   const theme = useTheme();
-   const classes = useStyles({ ...props, theme });
+   const classes = useStyles(props);
 
-   return <div className={classes.flex}>{ children }</div>
+   return <div className={classes.flex} data-arena-type="flex" data-arena-direction={direction.replace('-reverse', '')}>{ children }</div>
 }
 
-const useStyles = createUseStyles((theme: Theme) => ({
-   'flex': (props: FlexProps) => {
+const useStyles = (props: LayoutProps) => {
+   return createUseStyles((theme: Theme) => {
       let style = {
          display: 'flex',
          flexDirection: props.direction ? directionPropToFlexDirection[props.direction] : undefined,
@@ -70,6 +66,8 @@ const useStyles = createUseStyles((theme: Theme) => ({
             }
          }
       }
-      return style;
-   }
-}));
+      return {
+         'flex': style,
+      };
+   })();
+};
