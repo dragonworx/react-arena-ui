@@ -65,9 +65,6 @@ export function Examples(props: ExamplesProps) {
    )
 }
 
-const HeaderSize = 80;
-const FooterSize = 30;
-
 const useStyles = createUseStyles((theme: Theme) => ({
    'panel': {
       padding: theme.padding,
@@ -115,18 +112,16 @@ const useStyles = createUseStyles((theme: Theme) => ({
       position: 'relative',
       width: '100%',
       height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
 
       '& header': {
          extend: 'panel',
          backgroundColor: theme.accentColor,
-         position: 'absolute',
-         top: theme.padding,
-         left: theme.padding,
-         width: `calc(100% - ${theme.padding}px * 2)`,
-         height: HeaderSize,
+         marginBottom: theme.padding,
          textAlign: 'center',
          fontSize: theme.fontSizeLarge,
-         color: '#ccc',
+         color: theme.textColorLight,
          fontWeight: 'bold',
          fontFamily: 'arena-theme-bold',
          textShadow: '0 3px 4px rgba(0,0,0,0.3)',
@@ -140,24 +135,18 @@ const useStyles = createUseStyles((theme: Theme) => ({
       },
       '& footer': {
          extend: 'panel',
-         position: 'absolute',
-         bottom: theme.padding,
-         height: FooterSize,
-         left: theme.padding,
-         width: `calc(100% - ${theme.padding}px * 2)`,
          textAlign: 'center',
          color: 'white',
          fontSize: theme.fontSizeSmall,
+         marginBottom: theme.padding,
       }
    },
    'examples': {
-      position: 'absolute',
-      top: HeaderSize + theme.padding * 2,
-      width: `calc(100% - ${theme.padding * 2}px)`,
-      bottom: FooterSize + theme.padding * 2,
       display: 'flex',
       flexDirection: 'row',
-      flexGrow: 2,
+      flexGrow: 1,
+      marginBottom: theme.padding,
+      overflow: 'auto',
    },
    'menu': {
       extend: 'panel',
@@ -211,7 +200,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
 
             '& label': {
                fontFamily: 'arena-theme-light',
-               color: Color(theme.textColorLight).darken(0.15).hex(),
+               color: theme.textColor,
                textShadow: '0 3px 2px rgba(0,0,0,0.3)',
                marginBottom: theme.padding,
                display: 'block',
