@@ -10,13 +10,6 @@ export interface LabelProps {
    align?: 'near' | 'center' | 'far';
 }
 
-const positionPropToFlexDirection = {
-   'left': 'horizontal',
-   'right': 'horizontal-reverse',
-   'top': 'vertical',
-   'bottom': 'vertical-reverse',
-} as any;
-
 const alignPropToFlexAlignItems = {
    'near': 'flex-start',
    'center': 'center',
@@ -28,12 +21,11 @@ export function Label(props: LabelProps) {
 
    const classes = useStyles(props);
 
-   const flexDirection = positionPropToFlexDirection[position];
    const alignItems = alignPropToFlexAlignItems[align];
 
    return (
       <div className={classes.label}>
-         <Layout direction={flexDirection} align={alignItems}>
+         <Layout direction={position === 'left' || position === 'right' ? 'horizontal' : 'vertical'} reverse={position === 'right' || position === 'bottom'} align={alignItems}>
             <div className={classes.text} data-arena-type="label-text" data-arena-align={align}>{text}</div>
             {children}
          </Layout>
@@ -74,7 +66,7 @@ const useStyles = (props: LabelProps) => {
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: theme.fontSizeSmall,
-            fontFamily: theme.fontFamily,
+            fontFamily: 'arena-theme-regular',
             textShadow: '2px 2px 2px rgba(0, 0, 0, 0.3)',
             margin: theme.padding * 0.9,
          }

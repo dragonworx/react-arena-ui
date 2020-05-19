@@ -5,7 +5,9 @@ import { Theme, createUseStyles } from '~lib';
 export interface LayoutProps {
    children?: ReactNode;
    padded?: boolean;
-   direction?: 'horizontal' | 'horizontal-reverse' | 'vertical' | 'vertical-reverse';
+   padding?: number;
+   direction?: 'horizontal' | 'vertical';
+   reverse?: boolean; 
    wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
    justify?: 'near' | 'center' | 'far';
    align?: 'near' | 'center' | 'far';
@@ -41,25 +43,36 @@ export function Layout(props: LayoutProps) {
 
    const classes = useStyles(props);
 
-   return <div className={classes.flex} data-arena-type="flex" data-arena-direction={direction.replace('-reverse', '')}>{ children }</div>
+   return <div className={classes.flex} data-arena-type="flex" data-arena-direction={direction}>{ children }</div>
+}
+
+type HVLayoutProps = Omit<LayoutProps, 'direction'>;
+
+export function HLayout(props: HVLayoutProps) {
+   return <Layout direction="horizontal" {...props} />;
+}
+
+export function VLayout(props: HVLayoutProps) {
+   return <Layout direction="vertical" {...props} />;
 }
 
 const useStyles = (props: LayoutProps) => {
+   const direction = `${props.direction || 'horizontal'}${props.reverse ? '-reverse' : ''}`;
    return createUseStyles((theme: Theme) => {
       let style = {
          display: 'flex',
-         flexDirection: props.direction ? directionPropToFlexDirection[props.direction] : undefined,
+         flexDirection: direction ? directionPropToFlexDirection[direction] : undefined,
          flexWrap: props.wrap,
          justifyContent: props.justify ? propToFlexValue[props.justify] : undefined,
          alignItems: props.align ? propToFlexValue[props.align] : undefined,
          alignContent: props.content,
       } as any;
-      if (props.padded) {
-         const marginKey = directionPropToMargin[props.direction || 'horizontal'];
+      if (props.padded || props.padding && props.padding > 0) {
+         const marginKey = directionPropToMargin[direction || 'horizontal'];
          style = {
             ...style,
             '& > *': {
-               [marginKey]: theme.padding,
+               [marginKey]: props.padding ? props.padding : theme.padding,
             },
             '& > :last-child': {
                [marginKey]: 0,

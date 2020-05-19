@@ -1,139 +1,141 @@
 import * as React from 'react';
-import { Layout, Label } from '~lib';
+import { Layout, Label, HLayout, VLayout } from '~lib';
 import { BoxSmall, BoxMedium, BoxLarge } from './box';
+
+const padding = 30;
 
 export function LayoutExamples() {
    return (
       <ul>
          <li>
-            <label>Default (Horizontal) + Padded</label>
-            <Layout padded={true}>
-               <Layout>
+            <label>HLayout + Padded</label>
+            <HLayout padding={padding}>
+               <HLayout>
                   <BoxSmall />
                   <BoxSmall />
-               </Layout>
-               <Layout padded={true}>
+               </HLayout>
+               <HLayout padded={true}>
                   <BoxSmall />
                   <BoxSmall />
-               </Layout>
-            </Layout>
+               </HLayout>
+            </HLayout>
          </li>
          <li>
-            <label>Vertical + Padded</label>
-            <Layout padded={true}>
-               <Layout direction="vertical">
+            <label>VLayout + Padded</label>
+            <HLayout padding={padding}>
+               <VLayout>
                   <BoxSmall />
                   <BoxSmall />
-               </Layout>
-               <Layout direction="vertical" padded={true}>
+               </VLayout>
+               <VLayout padded={true}>
                   <BoxSmall />
                   <BoxSmall />
-               </Layout>
-            </Layout>
+               </VLayout>
+            </HLayout>
          </li>
          <li>
-            <label>Horizontal + Align</label>
-            <Layout padded={true}>
+            <label>HLayout + Align</label>
+            <HLayout padded={true}>
                <Label text="Near" align="near">
-                  <Layout padded={true} align="near">
+                  <HLayout padded={true} align="near">
                      <BoxSmall />
                      <BoxMedium />
                      <BoxLarge />
-                  </Layout>
+                  </HLayout>
                </Label>
                <Label text="Center">
-                  <Layout padded={true} align="center">
+                  <HLayout padded={true} align="center">
                      <BoxSmall />
                      <BoxMedium />
                      <BoxLarge />
-                  </Layout>
+                  </HLayout>
                </Label>
                <Label text="Far" align="far">
-                  <Layout padded={true} align="far">
+                  <HLayout padded={true} align="far">
                      <BoxSmall />
                      <BoxMedium />
                      <BoxLarge />
-                  </Layout>
+                  </HLayout>
                </Label>
-            </Layout>
+            </HLayout>
          </li>
          <li>
-            <label>Horizontal-Reverse + Align</label>
-            <Layout padded={true}>
+            <label>HLayout Reverse + Align</label>
+            <HLayout padded={true}>
                <Label text="Near" align="near" position="right">
-                  <Layout padded={true} direction="horizontal-reverse" align="near">
+                  <HLayout padded={true} reverse={true} align="near">
                      <BoxSmall />
                      <BoxMedium />
                      <BoxLarge />
-                  </Layout>
+                  </HLayout>
                </Label>
                <Label text="Center" position="right">
-                  <Layout padded={true} direction="horizontal-reverse" align="center">
+                  <HLayout padded={true} reverse={true} align="center">
                      <BoxSmall />
                      <BoxMedium />
                      <BoxLarge />
-                  </Layout>
+                  </HLayout>
                </Label>
                <Label text="Far" align="far" position="right">
-                  <Layout padded={true} direction="horizontal-reverse" align="far">
+                  <HLayout padded={true} reverse={true} align="far">
                      <BoxSmall />
                      <BoxMedium />
                      <BoxLarge />
-                  </Layout>
+                  </HLayout>
                </Label>
-            </Layout>
+            </HLayout>
          </li>
          <li>
-            <label>Vertical + Align</label>
-            <Layout padded={true}>
+            <label>VLayout + Align</label>
+            <HLayout padded={true}>
                <Label text="Near" position="top" align="near">
-                  <Layout padded={true} direction="vertical" align="near">
+                  <VLayout padded={true} align="near">
                      <BoxSmall />
                      <BoxMedium />
                      <BoxLarge />
-                  </Layout>
+                  </VLayout>
                </Label>
                <Label text="Center" position="top">
-                  <Layout padded={true} direction="vertical" align="center">
+                  <VLayout padded={true} align="center">
                      <BoxSmall />
                      <BoxMedium />
                      <BoxLarge />
-                  </Layout>
+                  </VLayout>
                </Label>
                <Label text="Far" position="top" align="far">
-                  <Layout padded={true} direction="vertical" align="far">
+                  <VLayout padded={true} align="far">
                      <BoxSmall />
                      <BoxMedium />
                      <BoxLarge />
-                  </Layout>
+                  </VLayout>
                </Label>
-            </Layout>
+            </HLayout>
          </li>
          <li>
-            <label>Vertical-Reverse + Align</label>
-            <Layout padded={true}>
+            <label>VLayout Reverse + Align</label>
+            <HLayout padded={true}>
                <Label text="Near" position="bottom" align="near">
-                  <Layout padded={true} direction="vertical-reverse" align="near">
+                  <VLayout padded={true} reverse={true} align="near">
                      <BoxSmall />
                      <BoxMedium />
                      <BoxLarge />
-                  </Layout>
+                  </VLayout>
                </Label>
                <Label text="Center" position="bottom">
-                  <Layout padded={true} direction="vertical-reverse" align="center">
+                  <VLayout padded={true} reverse={true} align="center">
                      <BoxSmall />
                      <BoxMedium />
                      <BoxLarge />
-                  </Layout>
+                  </VLayout>
                </Label>
                <Label text="Far" position="bottom" align="far">
-                  <Layout padded={true} direction="vertical-reverse" align="far">
+                  <VLayout padded={true} reverse={true} align="far">
                      <BoxSmall />
                      <BoxMedium />
                      <BoxLarge />
-                  </Layout>
+                  </VLayout>
                </Label>
-            </Layout>
+            </HLayout>
          </li>
       </ul>
    )

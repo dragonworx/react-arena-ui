@@ -36,6 +36,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
          color: theme.textColorLight,
          fontWeight: 'bold',
          fontSize: theme.fontSizeSmall,
+         fontFamily: theme.fontFamily,
       },
    }
 }));

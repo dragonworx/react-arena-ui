@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { useState } from 'react';
+import Color from 'color';
 import { LayoutExamples } from './layout';
 import { PanelExamples } from './panel';
 import { LabelExamples } from './label';
 import { ButtonExamples } from './button';
-import { Theme, createUseStyles, useTheme } from '~lib';
+import { Theme, createUseStyles, useTheme, fontFace } from '~lib';
 
 const sample = require('../img/sample.png');
 
@@ -42,7 +43,7 @@ export function Examples(props: ExamplesProps) {
    return (
          <div className={classes.app}>
             <header>
-               Arena2D UI Component Library - Examples
+               React Arena UI Examples
                <label>
                   Theme:
                   <select onChange={onThemeChange}>
@@ -80,8 +81,9 @@ const useStyles = createUseStyles((theme: Theme) => ({
          backgroundColor: theme.backgroundColorLight,
          '& *': {
             boxSizing: 'border-box',
-         }
+         },
       },
+      ...fontFace(theme),
       '#main': {
          position: 'absolute',
          top: 0,
@@ -116,7 +118,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
 
       '& header': {
          extend: 'panel',
-         backgroundColor: '#4b6c6f',
+         backgroundColor: theme.accentColor,
          position: 'absolute',
          top: theme.padding,
          left: theme.padding,
@@ -126,12 +128,11 @@ const useStyles = createUseStyles((theme: Theme) => ({
          fontSize: theme.fontSizeLarge,
          color: '#ccc',
          fontWeight: 'bold',
-         fontFamily: theme.fontFamily,
+         fontFamily: 'arena-theme-bold',
          textShadow: '0 3px 4px rgba(0,0,0,0.3)',
          '& label': {
             fontSize: theme.fontSizeSmall,
             display: 'block',
-            marginTop: theme.padding,
             '& select': {
                marginLeft: theme.padding,
             }
@@ -169,7 +170,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
 
          '& a': {
             color: 'white',
-            textDecoration: 'underline',
+            textDecoration: 'none',
             cursor: 'pointer',
             textTransform: 'capitalize',
             padding: theme.padding * 0.8,
@@ -178,17 +179,17 @@ const useStyles = createUseStyles((theme: Theme) => ({
             display: 'block',
             textAlign: 'center',
             borderRadius: theme.padding / 2,
-            borderRight: '5px solid white',
+            borderRight: `5px solid ${theme.textColorLight}`,
             fontSize: theme.fontSize,
-            fontFamily: theme.fontFamily,
+            fontFamily: 'arena-theme-bold',
 
             '&:hover': {
                backgroundColor: theme.backgroundColorLight,
             },
 
             '&[data-selected="true"]': {
-               borderRight: '5px solid cyan',
-               backgroundColor: 'rgba(0, 231, 255, 0.22)',
+               borderRight: `5px solid ${theme.highlightColor}`,
+               backgroundColor: theme.accentColor,
             }
          }
       }
@@ -209,15 +210,15 @@ const useStyles = createUseStyles((theme: Theme) => ({
             marginBottom: theme.padding * 2,
 
             '& label': {
-               fontFamily: theme.fontFamily,
-               color: '#b2d4dc',
+               fontFamily: 'arena-theme-light',
+               color: Color(theme.textColorLight).darken(0.15).hex(),
                textShadow: '0 3px 2px rgba(0,0,0,0.3)',
                marginBottom: theme.padding,
                display: 'block',
-               backgroundColor: 'rgba(135, 191, 204, 0.1)',
+               backgroundColor: theme.backgroundColorLight,
                padding: '3px 7px',
                borderRadius: 5,
-               borderBottom: '1px solid #2af5ff',
+               borderBottom: `1px solid ${theme.highlightColor}`,
             },
    
             '& label:after': {
