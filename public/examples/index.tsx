@@ -5,7 +5,7 @@ import { LayoutExamples } from './layout';
 import { PanelExamples } from './panel';
 import { LabelExamples } from './label';
 import { ButtonExamples } from './button';
-import { Theme, createUseStyles, useTheme, fontFace } from '~lib';
+import { Theme, createUseStyles, useTheme, fontFaces } from '~lib';
 
 const sample = require('../img/sample.png');
 
@@ -80,7 +80,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
             boxSizing: 'border-box',
          },
       },
-      ...fontFace(theme),
+      ...fontFaces(theme),
       '#main': {
          position: 'absolute',
          top: 0,
@@ -117,14 +117,15 @@ const useStyles = createUseStyles((theme: Theme) => ({
 
       '& header': {
          extend: 'panel',
-         backgroundColor: theme.accentColor,
+         backgroundColor: theme.accentColorDark,
          marginBottom: theme.padding,
          textAlign: 'center',
          fontSize: theme.fontSizeLarge,
          color: theme.textColorLight,
          fontWeight: 'bold',
-         fontFamily: 'arena-theme-bold',
+         fontFamily: 'arena-bold',
          textShadow: '0 3px 4px rgba(0,0,0,0.3)',
+         borderBottom: `3px solid ${theme.accentColor}`,
          '& label': {
             fontSize: theme.fontSizeSmall,
             display: 'block',
@@ -139,6 +140,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
          color: 'white',
          fontSize: theme.fontSizeSmall,
          marginBottom: theme.padding,
+         fontFamily: 'arena-regular'
       }
    },
    'examples': {
@@ -170,15 +172,15 @@ const useStyles = createUseStyles((theme: Theme) => ({
             borderRadius: theme.padding / 2,
             borderRight: `5px solid ${theme.textColorLight}`,
             fontSize: theme.fontSize,
-            fontFamily: 'arena-theme-bold',
+            fontFamily: 'arena-bold',
 
             '&:hover': {
                backgroundColor: theme.backgroundColorLight,
             },
 
             '&[data-selected="true"]': {
-               borderRight: `5px solid ${theme.highlightColor}`,
-               backgroundColor: theme.accentColor,
+               borderRight: `5px solid ${theme.accentColorDark}`,
+               backgroundColor: theme.accentColorDark,
             }
          }
       }
@@ -199,7 +201,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
             marginBottom: theme.padding * 2,
 
             '& label': {
-               fontFamily: 'arena-theme-light',
+               fontFamily: 'arena-light',
                color: theme.textColor,
                textShadow: '0 3px 2px rgba(0,0,0,0.3)',
                marginBottom: theme.padding,
@@ -207,7 +209,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
                backgroundColor: theme.backgroundColorLight,
                padding: '3px 7px',
                borderRadius: 5,
-               borderBottom: `1px solid ${theme.highlightColor}`,
+               borderBottom: `1px solid ${theme.accentColor}`,
             },
    
             '& label:after': {

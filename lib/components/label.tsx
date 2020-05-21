@@ -66,7 +66,7 @@ const useStyles = (props: LabelProps) => {
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: theme.fontSizeSmall,
-            fontFamily: 'arena-theme-regular',
+            fontFamily: 'arena-regular',
             textShadow: '2px 2px 2px rgba(0, 0, 0, 0.3)',
             margin: theme.padding * 0.9,
          }

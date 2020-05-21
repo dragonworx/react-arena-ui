@@ -36,7 +36,11 @@ const useStyles = createUseStyles((theme: Theme) => ({
          color: theme.textColorLight,
          fontWeight: 'bold',
          fontSize: theme.fontSizeSmall,
-         fontFamily: theme.fontFamily,
+         fontFamily: 'arena-bold',
+         backgroundColor: theme.backgroundColorLight,
+         borderRadius: theme.borderRadius,
+         padding: [0, theme.padding * 0.7],
+         borderTop: `1px solid ${theme.borderColor}`
       },
    }
 }));
