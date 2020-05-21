@@ -3252,6 +3252,11 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+lib@^4.2.0:
+  version "4.2.0"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/lib/-/lib-4.2.0.tgz#3491b8975e12daa436cdc92ba9254f139cd77be4"
+  integrity sha1-NJG4l14S2qQ2zckrqSVPE5zXe+Q=
+
 locate-path@^2.0.0:
   version "2.0.0"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/locate-path/-/locate-path-2.0.0.tgz#2b568b265eec944c6d9c0de9c3dbbbca0354cd8e"

@@ -1,12 +1,16 @@
 import * as React from 'react';
-import { Button } from '~lib';
+import { PushButton } from '~lib';
 
 export function ButtonExamples() {
    return (
       <ul>
          <li>
-            <label>Default</label>
-            <Button>Default</Button>
+            <label>PushButton</label>
+            <PushButton>Default</PushButton>
+         </li>
+         <li>
+            <label>PushButton + Toggle</label>
+            <PushButton isToggle={true}>Default</PushButton>
          </li>
       </ul>
    )

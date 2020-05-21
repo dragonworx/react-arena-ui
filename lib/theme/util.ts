@@ -69,4 +69,4 @@ export const createTheme = (props: ThemeProps): Theme => {
       fontSizeLarge: Math.round(props.fontSize * 1.75),
       fonts: props.fonts,
    } as Theme;
-}
+};
