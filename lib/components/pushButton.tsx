@@ -38,6 +38,11 @@ const useStyles = (props: ButtonProps) => {
             color: theme.textColorLight,
             borderColor: theme.borderColorLight,
             borderBottom: `2px solid ${theme.backgroundColorDark}`,
+            '& > *': {
+               position: 'relative',
+               left: 1,
+               top: 1,
+            }
          },
          '&.toggled': {
             borderStyle: 'inset',

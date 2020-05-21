@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, ReactNode } from 'react';
-import { css, useMouseUpEvent,useKeyDownEvent, useKeyUpEvent, Keys } from '~lib';
+import { css, useMouseUpEvent,useKeyDownEvent, useKeyUpEvent, Keys, HLayout } from '~lib';
 
 interface AbstractButtonProps {
    children?: ReactNode;
@@ -69,7 +69,7 @@ export function AbstractButton(props: AbstractButtonProps) {
          onBlur={onBlur}
          tabIndex={0}
       >
-         {children}
+         <HLayout padded>{children}</HLayout>
       </div>
    )
 }
