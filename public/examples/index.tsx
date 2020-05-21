@@ -67,8 +67,7 @@ export function Examples(props: ExamplesProps) {
 
 const useStyles = createUseStyles((theme: Theme) => ({
    'panel': {
-      padding: theme.padding,
-      border: '1px solid rgb(77, 77, 77)',
+      border: `1px solid ${theme.borderColorDark}`,
       borderRadius: theme.padding / 2,
       backgroundColor: theme.backgroundColor,
    },
@@ -117,7 +116,10 @@ const useStyles = createUseStyles((theme: Theme) => ({
 
       '& header': {
          extend: 'panel',
-         backgroundColor: theme.accentColorDark,
+         padding: theme.paddingSmall,
+         paddingBottom: theme.padding,
+         borderRadius: theme.borderRadiusLarge,
+         background: theme.accentColorDark,
          marginBottom: theme.padding,
          textAlign: 'center',
          fontSize: theme.fontSizeLarge,
@@ -136,6 +138,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
       },
       '& footer': {
          extend: 'panel',
+         padding: theme.paddingSmall,
          textAlign: 'center',
          color: 'white',
          fontSize: theme.fontSizeSmall,
@@ -152,6 +155,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
    },
    'menu': {
       extend: 'panel',
+      padding: theme.paddingSmall,
       height: '100%',
       margin: 0,
       marginRight: theme.padding,
@@ -179,7 +183,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
             },
 
             '&[data-selected="true"]': {
-               borderRight: `5px solid ${theme.accentColorDark}`,
+               borderRight: `5px solid ${theme.accentColor}`,
                backgroundColor: theme.accentColorDark,
             }
          }
@@ -190,6 +194,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
       flexGrow: 1,
       height: '100%',
       overflow: 'auto',
+      padding: theme.paddingSmall,
 
       '& ul': {
          padding: 0,
@@ -206,7 +211,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
                textShadow: '0 3px 2px rgba(0,0,0,0.3)',
                marginBottom: theme.padding,
                display: 'block',
-               backgroundColor: theme.backgroundColorLight,
+               backgroundColor: theme.backgroundColorDark,
                padding: '3px 7px',
                borderRadius: 5,
                borderBottom: `1px solid ${theme.accentColor}`,

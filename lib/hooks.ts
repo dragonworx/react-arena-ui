@@ -6,7 +6,7 @@ import {
 } from 'react';
 
 export function useInterval(callback: () => void, delay: number = 1000) {
-  const savedCallback = useRef<() => void>(() => void(0));
+  const savedCallback = useRef<() => void>(() => void (0));
 
   // Remember the latest callback.
   useEffect(() => {
@@ -39,7 +39,7 @@ export function useCurrentWindow(debounceMs: number = 30) {
       timeoutId = setTimeout(() => {
         setWidth(getWidth());
         setHeight(getHeight());
-      }, debounceMs);
+      }, debounceMs) as unknown as number;
     };
     window.addEventListener('resize', resizeListener);
 
@@ -55,13 +55,13 @@ export function useCurrentWindow(debounceMs: number = 30) {
 }
 
 export function useDOMEvent(targetOrRef: HTMLElement | RefObject<HTMLElement>, type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined) {
-   useEffect(() => {
-      const target: HTMLElement = 'current' in targetOrRef ? (targetOrRef as RefObject<HTMLElement>).current! : targetOrRef as HTMLElement;
-      target.addEventListener(type, listener, options);
-      return () => {
-        target.removeEventListener(type, listener, options);
-      };
-     }, []);
+  useEffect(() => {
+    const target: HTMLElement = 'current' in targetOrRef ? (targetOrRef as RefObject<HTMLElement>).current! : targetOrRef as HTMLElement;
+    target.addEventListener(type, listener, options);
+    return () => {
+      target.removeEventListener(type, listener, options);
+    };
+  });
 }
 
 export function useKeyDownEvent(listener: (e: KeyboardEvent) => void, target: HTMLElement | RefObject<HTMLElement> = document.body) {

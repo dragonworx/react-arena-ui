@@ -6,7 +6,7 @@ export function ButtonExamples() {
       <ul>
          <li>
             <label>Default</label>
-            <Button text="Text" />
+            <Button>Default</Button>
          </li>
       </ul>
    )

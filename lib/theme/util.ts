@@ -31,7 +31,7 @@ export interface Theme {
    fonts?: FontFace[]
 }
 
-export type ThemeProps = Pick<Theme, 'backgroundColor' | 'borderRadius' | 'borderColor' | 'textColor' | 'accentColor' | 'fontSize' | 'padding' | 'accentColor' | 'fonts'>;\
+export type ThemeProps = Pick<Theme, 'backgroundColor' | 'borderRadius' | 'borderColor' | 'textColor' | 'accentColor' | 'fontSize' | 'padding' | 'accentColor' | 'fonts'>;
 
 export const css = (...classNames: (string | undefined)[]) => classNames.filter(className => !!className).join(' ');
 
@@ -57,7 +57,7 @@ export const createTheme = (props: ThemeProps): Theme => {
       borderRadiusLarge: props.borderRadius * 2,
       borderColorLight: Color(props.borderColor).lighten(0.5).hex(),
       borderColor: props.borderColor,
-      borderColorDark: Color(props.borderColor).darken(0.5).hex(),
+      borderColorDark: Color(props.borderColor).darken(0.6).hex(),
       textColorLight: Color(props.textColor).lighten(0.5).hex(),
       textColor: props.textColor,
       textColorDark: Color(props.textColor).darken(0.5).hex(),

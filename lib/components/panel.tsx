@@ -26,6 +26,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
       borderColor: theme.borderColor,
       borderWidth: 1,
       borderStyle: 'outset',
+      borderBottom: `2px solid ${theme.borderColorDark}`,
       padding: theme.padding,
       paddingTop: theme.padding * 0.8,
       paddingBottom: theme.padding * 1.2,
@@ -38,8 +39,8 @@ const useStyles = createUseStyles((theme: Theme) => ({
          fontSize: theme.fontSizeSmall,
          fontFamily: 'arena-bold',
          backgroundColor: theme.backgroundColorLight,
-         borderRadius: theme.borderRadius,
-         padding: [0, theme.padding * 0.7],
+         borderRadius: theme.borderRadiusLarge,
+         padding: [0, theme.padding],
          borderTop: `1px solid ${theme.borderColor}`
       },
    }
