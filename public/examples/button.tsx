@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Checkbox, HLayout, VLayout } from '~lib';
+import { Button, Checkbox, Radio, HLayout, VLayout } from '~lib';
 import { LI } from './listItem';
 import { BoxSmall } from './box';
 
@@ -34,6 +34,20 @@ export function ButtonExamples() {
             <HLayout padded>
                <Checkbox label="Top Label" position="top" />
                <Checkbox label="Bottom Label" position="bottom" />
+            </HLayout>
+         </LI>
+         <LI label="Radio" direction="vertical">
+            <HLayout padded>
+               <Radio />
+               <Radio checked={true} />
+            </HLayout>
+            <HLayout padded>
+               <Radio label="Left Label" />
+               <Radio label="Right Label" position="right" />
+            </HLayout>
+            <HLayout padded>
+               <Radio label="Top Label" position="top" />
+               <Radio label="Bottom Label" position="bottom" />
             </HLayout>
          </LI>
       </ul>

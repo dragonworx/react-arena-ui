@@ -7,12 +7,14 @@ interface BaseButtonProps {
    type?: string;
    className?: string;
    toggle?: boolean;
+   canUnToggle?: boolean;
    isToggled?: boolean;
    reverse?: boolean;
    padded?: boolean;
    color?: string;
    highlightColor?: string;
    bgColor?: string;
+   radius?: number;
    onClick?: () => void;
    onToggle?: (isToggled: boolean) => void;
 }
@@ -22,7 +24,7 @@ export type ButtonProps = Omit<BaseButtonProps, 'className'>;
 const isAcceptKey = (e: KeyboardEvent) => e.keyCode === Keys.SPACE || e.keyCode === Keys.ENTER;
 
 export function Button(props: BaseButtonProps) {
-   const { children, type, className, toggle = false, isToggled: _isToggled = false, reverse = false, onClick, onToggle } = props;
+   const { children, type, className, toggle = false, isToggled: _isToggled = false, canUnToggle = true, reverse = false, onClick, onToggle } = props;
    const [isToggled, setIsToggled] = useState(_isToggled);
    const [isHover, setIsHover] = useState(false);
    const [isTempHover, setIsTempHover] = useState(false);
@@ -37,6 +39,9 @@ export function Button(props: BaseButtonProps) {
       onClick && onClick();
       if (toggle) {
          const isNowToggled = !isToggled;
+         if (isNowToggled === false && canUnToggle === false) {
+            return;
+         }
          setIsToggled(isNowToggled);
          onToggle && onToggle(isNowToggled);
       }
@@ -89,7 +94,7 @@ const useStyles = (props: BaseButtonProps) => {
    return createUseStyles((theme: Theme) => ({
       'button': {
          position: 'relative',
-         borderRadius: theme.borderRadius,
+         borderRadius: props.radius ? props.radius : theme.borderRadius,
          borderColor: theme.borderColor,
          borderWidth: 1,
          borderStyle: 'outset',

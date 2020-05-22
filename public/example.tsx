@@ -7,7 +7,7 @@ import {
    PanelExamples,
 
 } from './examples';
-import { Theme, createUseStyles, useTheme, fontFaces } from '~lib';
+import { Theme, createUseStyles, fontFaces } from '~lib';
 
 const sample = require('./img/sample.png');
 
