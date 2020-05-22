@@ -4,6 +4,8 @@ import { Theme, createUseStyles } from '~lib';
 
 export interface PanelProps {
    children?: ReactNode;
+   border?: boolean;
+   radius?: number;
    title?: string;
    titleColor?: string;
    titleBg?: string;
@@ -24,20 +26,20 @@ export function Panel(props: PanelProps) {
 }
 
 const useStyles = (props: PanelProps) => {
-   const { padded = true } = props;
+   const { padded = true, border = true } = props;
    return createUseStyles((theme: Theme) => ({
       'panel': {
-         borderRadius: theme.borderRadius,
+         borderRadius: typeof props.radius === 'number' ? props.radius : theme.borderRadius,
          borderColor: theme.borderColor,
-         borderWidth: 1,
+         borderWidth: border ? 1 : 0,
          borderStyle: 'outset',
-         borderBottom: `2px solid ${theme.borderColorDark}`,
+         borderBottom: border ? `2px solid ${theme.borderColorDark}` : 'none',
          padding: padded ? theme.padding : 0,
          paddingTop: padded ? theme.padding : 0,
          paddingBottom: padded ? theme.padding * 1.2 : 0,
          backgroundColor: theme.backgroundColorLight,
          width: '100%',
-         height: '100%',
+         height: `calc(100% - ${props.title ? theme.padding * 1 : 0}px)`,
          color: theme.textColor,
          position: 'relative',
          fontFamily: 'arena-regular',
@@ -56,6 +58,7 @@ const useStyles = (props: PanelProps) => {
             top: theme.padding * -1.5,
             left: theme.padding,
             zIndex: 1,
+            height: theme.padding * 2,
             boxShadow: `0px 2px 2px 2px rgba(0,0,0,0.1)`,
          },
       }

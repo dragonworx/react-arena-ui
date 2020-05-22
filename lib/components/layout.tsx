@@ -17,6 +17,7 @@ export interface LayoutProps {
    width?: string | number;
    color?: string;
    bgColor?: string;
+   radius?: number;
    imageSrc?: string;
    imageSize?: string;
    imageRepeat?: 'no-repeat' | 'repeat-x' | 'repeat-y';
@@ -78,7 +79,7 @@ const useStyles = (props: LayoutProps) => {
    return createUseStyles((theme: Theme) => {
       let style = {
          display: 'flex',
-         borderRadius: theme.borderRadius,
+         borderRadius: typeof props.radius === 'number' ? props.radius : theme.borderRadius,
          flexDirection: direction ? directionPropToFlexDirection[direction] : undefined,
          flexWrap: props.wrap,
          justifyContent: props.justify ? propToFlexValue[props.justify] : undefined,

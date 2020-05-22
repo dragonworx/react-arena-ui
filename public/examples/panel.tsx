@@ -23,12 +23,20 @@ export function PanelExamples() {
             </Panel>
          </LI>
          <LI label="With Title &amp; Content">
-            <Panel title="Panel Title">
-               <HLayout padded>
-                  <BoxMedium />
-                  <span>Panel content...</span>
-               </HLayout>
-            </Panel>
+            <HLayout width="100%" height={100}>
+               <Panel title="Panel Title">
+                  <HLayout padded>
+                     <BoxMedium />
+                     <span>Panel content...</span>
+                  </HLayout>
+               </Panel>
+               <Panel border={false} radius={0}>
+                  <HLayout padded>
+                     <BoxMedium />
+                     <span>Panel content no border...</span>
+                  </HLayout>
+               </Panel>
+            </HLayout>
          </LI>
          <LI label="With Background Color" direction="vertical">
             <HLayout width="100%" height={100}>
@@ -37,9 +45,9 @@ export function PanelExamples() {
                      <span>Panel content...</span>
                   </VLayout>
                </Panel>
-               <Panel title="Color" padded={false} titleBg={panelColor}>
-                  <VLayout bgColor={panelColor} height="100%" innerPadding={true}>
-                     <span>Panel content with color title...</span>
+               <Panel title="Color" padded={false} titleBg={panelColor} border={false} radius={0}>
+                  <VLayout bgColor={panelColor} height="100%" innerPadding={true} radius={0}>
+                     <span>Panel content with color title no border...</span>
                   </VLayout>
                </Panel>
             </HLayout>
@@ -72,7 +80,7 @@ export function PanelExamples() {
          </LI>
          <LI label="With Background Gradient" direction="vertical" padding={20}>
             <HLayout width="100%" height={100}>
-            <Panel title="Gradient" padded={false} titleBg="#eee" titleColor="black">
+               <Panel title="Gradient" padded={false} titleBg="#eee" titleColor="black">
                   <VLayout height="100%" innerPadding={true} gradientStart="white" gradientStop="black" color="black">
                      <span>Panel content...</span>
                   </VLayout>
