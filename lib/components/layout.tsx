@@ -43,7 +43,7 @@ export function Layout(props: LayoutProps) {
 
    const classes = useStyles(props);
 
-   return <div className={classes.layout} data-arena-id={`layout:${direction}`}>{ children }</div>
+   return <div className={classes.layout} data-arena={`layout:${direction}`}>{ children }</div>
 }
 
 type HVLayoutProps = Omit<LayoutProps, 'direction'>;

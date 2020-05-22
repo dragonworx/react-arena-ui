@@ -1,22 +1,22 @@
 import * as React from 'react';
-import { PushButton, HLayout } from '~lib';
+import { Button, HLayout } from '~lib';
 import { BoxSmall } from './box';
 
 export function ButtonExamples() {
    return (
       <ul>
          <li>
-            <label>PushButton</label>
+            <label>Button</label>
             <HLayout padded>
-               <PushButton>Button</PushButton>
-               <PushButton><span>Button</span><BoxSmall /></PushButton>
+               <Button>Button</Button>
+               <Button><span>Button</span><BoxSmall /></Button>
             </HLayout>
          </li>
          <li>
-            <label>PushButton + Toggle</label>
+            <label>Button + Toggle</label>
             <HLayout padded>
-               <PushButton isToggle>Button</PushButton>
-               <PushButton isToggle><span>Button</span><BoxSmall /></PushButton>
+               <Button isToggle>Button</Button>
+               <Button isToggle><span>Button</span><BoxSmall /></Button>
             </HLayout>
          </li>
       </ul>
