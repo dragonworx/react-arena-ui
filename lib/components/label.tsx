@@ -37,7 +37,7 @@ const useStyles = (props: LabelProps) => {
    return createUseStyles((theme: Theme) => {
       let style = {
          display: 'inline-block',
-         '& *[data-arena-type="flex"][data-arena-direction="horizontal"]': {
+         '& *[data-arena-type="layout"][data-arena-direction="horizontal"]': {
             '& > *[data-arena-type="label-text"][data-arena-align="near"]': {
                marginTop: 0,
                alignSelf: 'flex-start',
@@ -47,7 +47,7 @@ const useStyles = (props: LabelProps) => {
                alignSelf: 'flex-end',
             },
          },
-         '& *[data-arena-type="flex"][data-arena-direction="vertical"]': {
+         '& *[data-arena-type="layout"][data-arena-direction="vertical"]': {
             '& > *[data-arena-type="label-text"][data-arena-align="near"]': {
                marginLeft: 0,
                alignSelf: 'flex-start',

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Theme, createUseStyles } from '~lib';
-import { ButtonProps, AbstractButton } from './abstractButton';
+import { ButtonProps, BaseButton } from './button';
 
 export function PushButton(props: ButtonProps) {
    const classes = useStyles(props);
 
    return (
-      <AbstractButton className={classes.button} {...props} />
+      <BaseButton className={classes.button} {...props} />
    )
 }
 

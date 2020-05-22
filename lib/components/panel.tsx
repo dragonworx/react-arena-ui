@@ -39,7 +39,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
          fontSize: theme.fontSizeSmall,
          fontFamily: 'arena-bold',
          backgroundColor: theme.backgroundColorLight,
-         borderRadius: theme.borderRadiusLarge,
+         borderRadius: theme.borderRadius,
          padding: [0, theme.padding],
          borderTop: `1px solid ${theme.borderColor}`
       },

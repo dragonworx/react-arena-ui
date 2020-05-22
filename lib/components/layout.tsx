@@ -43,7 +43,7 @@ export function Layout(props: LayoutProps) {
 
    const classes = useStyles(props);
 
-   return <div className={classes.flex} data-arena-type="flex" data-arena-direction={direction}>{ children }</div>
+   return <div className={classes.layout} data-arena-type="layout" data-arena-direction={direction}>{ children }</div>
 }
 
 type HVLayoutProps = Omit<LayoutProps, 'direction'>;
@@ -80,7 +80,7 @@ const useStyles = (props: LayoutProps) => {
          }
       }
       return {
-         'flex': style,
+         'layout': style,
       };
    })();
 };

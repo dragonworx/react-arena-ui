@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { useState, ReactNode } from 'react';
-import { css, useMouseUpEvent,useKeyDownEvent, useKeyUpEvent, Keys, HLayout } from '~lib';
+import { css, useMouseUpEvent,useKeyDownEvent, useKeyUpEvent, Keys, HLayout, createUseStyles, Theme } from '~lib';
 
-interface AbstractButtonProps {
+interface BaseButtonProps {
    children?: ReactNode;
    className?: string;
    isToggle?: boolean;
 }
 
-export type ButtonProps = Omit<AbstractButtonProps, 'className'>;
+export type ButtonProps = Omit<BaseButtonProps, 'className'>;
 
 const isAcceptKey = (e: KeyboardEvent) => e.keyCode === Keys.SPACE || e.keyCode === Keys.ENTER;
 
-export function AbstractButton(props: AbstractButtonProps) {
+export function BaseButton(props: BaseButtonProps) {
    const { children, className, isToggle = false } = props;
    const [isToggled, setIsToggled] = useState(false);
    const [isHover, setIsHover] = useState(false);
@@ -51,8 +51,11 @@ export function AbstractButton(props: AbstractButtonProps) {
       }
    }, document.body);
 
+   const classes = useStyles();
+
    const classNames = [
       className,
+      classes.button,
       isHover ? 'hover' : undefined,
       (isHover || isTempHover) && isDown ? 'down' : undefined,
       isToggled ? 'toggled' : undefined,
@@ -69,7 +72,16 @@ export function AbstractButton(props: AbstractButtonProps) {
          onBlur={onBlur}
          tabIndex={0}
       >
-         <HLayout padded>{children}</HLayout>
+         <HLayout padded align="center">{children}</HLayout>
       </div>
    )
 }
+
+const useStyles = createUseStyles((theme: Theme) => ({
+   'button': {
+      '& > *': {
+         width: '100%',
+         height: '100%',
+      }
+   }
+}));
