@@ -52,7 +52,7 @@ export function Button(props: BaseButtonProps) {
    }, document.body);
 
    const classes = useStyles();
-   const data = `button:${isHover ? 'hover-1' : 'hover-0'}:${(isHover || isTempHover) && isDown ? 'down-1' : 'down-0'}:${isToggled ? 'toggled-1' : 'toggled-0'}`;
+   const data = `button:${isHover ? 'hover-1' : 'hover-0'}:${(isHover || isTempHover) && isDown ? 'down-1' : 'down-0'}:${isToggled ? 'toggled-1' : 'toggled-0'}:${isFocus ? 'focus-1' : 'focus-0'}`;
 
    return (
       <div
@@ -88,7 +88,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
       cursor: 'pointer',
       userSelect: 'none',
       '&:focus': {
-         'outline': `${theme.accentColor} outset 1px`,
+         'outline': 0,
       },
       '& > *': {
          width: '100%',
@@ -118,6 +118,9 @@ const useStyles = createUseStyles((theme: Theme) => ({
       '&[data-arena*="toggle-1"][data-arena*="down-1"]': {
          extend: 'toggle',
          backgroundColor: theme.backgroundColorLight,
+      },
+      '&[data-arena*="focus-1"]': {
+         borderBottomColor: theme.accentColorDark,
       },
    },
    'over': {

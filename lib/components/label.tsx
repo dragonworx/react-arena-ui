@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
 import { Layout } from './layout';
-import { Theme, createUseStyles, css } from '~lib';
+import { Theme, createUseStyles } from '~lib';
 
 export interface LabelProps {
    children?: ReactNode;
@@ -26,50 +26,48 @@ export function Label(props: LabelProps) {
    return (
       <div className={classes.label}>
          <Layout direction={position === 'left' || position === 'right' ? 'horizontal' : 'vertical'} reverse={position === 'right' || position === 'bottom'} align={alignItems}>
-            <div className={classes.text} data-arena-id={`label-text:${align}`}>{text}</div>
+            <div className={classes.text} data-arena={`label-text:${align}`}>{text}</div>
             {children}
          </Layout>
       </div>
    )
 }
 
-const useStyles = (props: LabelProps) => {
-   return createUseStyles((theme: Theme) => {
-      let style = {
-         display: 'inline-block',
-         '& *[data-arena-id="layout:horizontal"]': {
-            '& > *[data-arena-id="label-text:near"]': {
-               marginTop: 0,
-               alignSelf: 'flex-start',
-            },
-            '& > *[data-arena-id="label-text:far"]': {
-               marginBottom: 0,
-               alignSelf: 'flex-end',
-            },
+const useStyles = createUseStyles((theme: Theme) => {
+   let style = {
+      display: 'inline-block',
+      '& *[data-arena*="layout:horizontal"]': {
+         '& > *[data-arena*="label-text:near"]': {
+            marginTop: 0,
+            alignSelf: 'flex-start',
          },
-         '& *[data-arena-id="layout:vertical"]': {
-            '& > *[data-arena-id="label-text:near"]': {
-               marginLeft: 0,
-               alignSelf: 'flex-start',
-            },
-            '& > *[data-arena-id="label-text:far"]': {
-               marginRight: 0,
-               alignSelf: 'flex-end',
-            },
+         '& > *[data-arena*="label-text:far"]': {
+            marginBottom: 0,
+            alignSelf: 'flex-end',
          },
-      } as any;
-      return {
-         'label': style,
-         'text': {
-            color: theme.textColorLight,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: theme.fontSizeSmall,
-            fontFamily: 'arena-regular',
-            textShadow: '2px 2px 2px rgba(0, 0, 0, 0.3)',
-            margin: theme.padding * 0.9,
-         }
-      };
-   })();
-};
+      },
+      '& *[data-arena*="layout:vertical"]': {
+         '& > *[data-arena*="label-text:near"]': {
+            marginLeft: 0,
+            alignSelf: 'flex-start',
+         },
+         '& > *[data-arena*="label-text:far"]': {
+            marginRight: 0,
+            alignSelf: 'flex-end',
+         },
+      },
+   } as any;
+   return {
+      'label': style,
+      'text': {
+         color: theme.textColorLight,
+         display: 'flex',
+         alignItems: 'center',
+         justifyContent: 'center',
+         fontSize: theme.fontSizeSmall,
+         fontFamily: 'arena-regular',
+         textShadow: '2px 2px 2px rgba(0, 0, 0, 0.3)',
+         margin: theme.padding * 0.9,
+      }
+   };
+});
