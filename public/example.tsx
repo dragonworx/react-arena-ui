@@ -1,13 +1,15 @@
 import * as React from 'react';
 import { useState } from 'react';
-import Color from 'color';
-import { LayoutExamples } from './layout';
-import { PanelExamples } from './panel';
-import { LabelExamples } from './label';
-import { ButtonExamples } from './button';
+import {
+   ButtonExamples,
+   LabelExamples,
+   LayoutExamples,
+   PanelExamples,
+
+} from './examples';
 import { Theme, createUseStyles, useTheme, fontFaces } from '~lib';
 
-const sample = require('../img/sample.png');
+const sample = require('./img/sample.png');
 
 const Routes = {
    'layout': LayoutExamples,
@@ -17,13 +19,15 @@ const Routes = {
 } as any;
 
 interface ExamplesProps {
+   theme: string;
    onThemeChange: (themeName: string) => void;
 }
 
 export function Examples(props: ExamplesProps) {
+   const { onThemeChange, theme } = props;
    const [selectedRoute, stSelectedRoute] = useState(window.location.hash.replace('#', ''));
-   const theme = useTheme();
-   const classes = useStyles({ theme });
+
+   const classes = useStyles();
 
    const content = () => {
       if (selectedRoute) {
@@ -36,8 +40,8 @@ export function Examples(props: ExamplesProps) {
    const onRoute = (routeValue: string) => () => stSelectedRoute(routeValue);
    const link = (route: string) => <li key={`route-${route}`}><a href={`#${route}`} data-selected={route === selectedRoute} onClick={onRoute(`${route}`)}>{route}</a></li>;
 
-   const onThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      props.onThemeChange(e.target.value);
+   const onThemeChanged = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      onThemeChange(e.target.value);
    };
 
    return (
@@ -46,7 +50,7 @@ export function Examples(props: ExamplesProps) {
                React Arena UI Examples
                <label>
                   Theme:
-                  <select onChange={onThemeChange}>
+                  <select onChange={onThemeChanged} defaultValue={theme}>
                      <option>default</option>
                      <option>test</option>
                   </select>
@@ -119,7 +123,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
          padding: theme.paddingSmall,
          paddingBottom: theme.padding,
          borderRadius: theme.borderRadiusLarge,
-         background: theme.accentColorDark,
+         backgroundColor: theme.accentColorDark,
          marginBottom: theme.padding,
          textAlign: 'center',
          fontSize: theme.fontSizeLarge,
@@ -207,6 +211,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
 
             '& label': {
                fontFamily: 'arena-light',
+               fontSize: theme.fontSize,
                color: theme.textColor,
                textShadow: '0 3px 2px rgba(0,0,0,0.3)',
                marginBottom: theme.padding,

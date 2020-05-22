@@ -3,8 +3,6 @@ import { Theme, createUseStyles } from '~lib';
 import { ButtonProps, AbstractButton } from './abstractButton';
 
 export function PushButton(props: ButtonProps) {
-   const { children } = props;
-
    const classes = useStyles(props);
 
    return (
@@ -23,6 +21,7 @@ const useStyles = (props: ButtonProps) => {
          padding: [theme.paddingSmall, theme.padding],
          backgroundColor: theme.backgroundColor,
          fontFamily: 'arena-regular',
+         fontSize: theme.fontSize,
          color: theme.textColorLight,
          display: 'inline-block',
          cursor: 'pointer',

@@ -10,7 +10,7 @@ export const testTheme = createTheme({
    borderColor: '#ccc',
    textColor: '#666',
    accentColor: '#ec9e0f',
-   fontSize: 14,
+   fontSize: 12,
    padding: 5,
    fonts: [
       {
