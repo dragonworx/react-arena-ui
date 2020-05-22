@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Panel, HLayout, Background } from '~lib';
+import { Panel, HLayout, VLayout } from '~lib';
 import { LI } from './listItem';
 import { BoxSmall, BoxMedium } from './box';
 
 const sample = require('../img/koala.jpeg');
+const panelColor = '#4d4d6b';
 
 export function PanelExamples() {
    return (
@@ -31,49 +32,41 @@ export function PanelExamples() {
          </LI>
          <LI label="With Background Color" direction="vertical">
             <HLayout width="100%" height={100}>
-               <Panel title="Blue">
-                  <Background color="blue" padded>
+               <Panel title="Blue" padded={false}>
+                  <VLayout bgColor={panelColor} height="100%" innerPadding={true}>
                      <span>Panel content...</span>
-                  </Background>
+                  </VLayout>
                </Panel>
-               <Panel title="Blue" titleColor="blue">
-                  <Background color="blue" padded>
-                     <span>Panel content and coloured title...</span>
-                  </Background>
+               <Panel title="Blue" padded={false} titleColor={panelColor}>
+                  <VLayout bgColor={panelColor} height="100%" innerPadding={true}>
+                     <span>Panel content with color title...</span>
+                  </VLayout>
                </Panel>
             </HLayout>
          </LI>
-         <LI label="With Image Background" direction="vertical" padding={20}>
+         <LI label="With Background Image" direction="vertical" padding={20}>
             <HLayout width="100%" height={100}>
-               <Panel title="Blue">
-                  <Background imageSrc={sample} padded>
-                     <HLayout padded>
-                        <span>Panel content...</span>
-                     </HLayout>
-                  </Background>
+               <Panel title="Image" padded={false}>
+                  <VLayout bgColor={panelColor} height="100%" innerPadding={true} imageSrc={sample}>
+                     <span>Panel content...</span>
+                  </VLayout>
                </Panel>
-               <Panel title="Image">
-                  <Background imageSrc={sample} imageSize="cover" padded>
-                     <HLayout padded>
-                        <span>Panel content...</span>
-                     </HLayout>
-                  </Background>
+               <Panel title="Image" padded={false}>
+                  <VLayout bgColor={panelColor} height="100%" innerPadding={true} imageSrc={sample} imageSize="contain">
+                     <span>Panel content with color title...</span>
+                  </VLayout>
                </Panel>
             </HLayout>
             <HLayout width="100%" height={100}>
-               <Panel title="Blue">
-                  <Background imageSrc={sample} imageSize="contain" padded>
-                     <HLayout padded>
-                        <span>Panel content...</span>
-                     </HLayout>
-                  </Background>
+               <Panel title="Image" padded={false}>
+                  <VLayout bgColor={panelColor} height="100%" innerPadding={true} imageSrc={sample} imageSize="cover">
+                     <span>Panel content...</span>
+                  </VLayout>
                </Panel>
-               <Panel title="Image">
-                  <Background imageSrc={sample} imageSize="contain" imageRepeat="no-repeat" imagePos="center" padded>
-                     <HLayout padded>
-                        <span>Panel content...</span>
-                     </HLayout>
-                  </Background>
+               <Panel title="Image + Background Color" padded={false} titleColor={panelColor}>
+                  <VLayout bgColor={panelColor} height="100%" innerPadding={true} imageSrc={sample} imageSize="50px 50px" imageRepeat="no-repeat" imagePos="center 30px">
+                     <span>Panel content with color title and image placement</span>
+                  </VLayout>
                </Panel>
             </HLayout>
          </LI>

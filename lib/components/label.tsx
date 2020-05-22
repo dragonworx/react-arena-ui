@@ -57,7 +57,6 @@ const useStyles = (props: LabelProps) => {
          '& *[data-arena*="layout:vertical"]': {
             '& > *[data-arena*="label-text"]': {
                margin: theme.paddingSmall,
-               alignSelf: 'flex-start',
             },
             '& > *[data-arena*="label-text:near"]': {
                marginLeft: 0,

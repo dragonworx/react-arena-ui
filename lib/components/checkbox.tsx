@@ -27,8 +27,8 @@ const useStyles = (props: CheckboxProps) => {
    return createUseStyles((theme: Theme) => ({
       'checkbox': {
          padding: theme.paddingSmall,
-         width: 20,
-         height: 20,
+         width: theme.padding * 2,
+         height: theme.padding * 2.1,
          color: theme.textColor,
          borderRadius: theme.borderRadiusSmall,
          borderColor: theme.borderColorLight,

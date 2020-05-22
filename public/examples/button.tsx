@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Checkbox, HLayout, Background, Layout } from '~lib';
+import { Button, Checkbox, HLayout, VLayout } from '~lib';
 import { LI } from './listItem';
 import { BoxSmall } from './box';
 
@@ -11,12 +11,10 @@ export function ButtonExamples() {
          <LI label="Button" height={35}>
             <Button onClick={() => console.log('Button Clicked!')}>Button (onClick)</Button>
             <Button><span>Button</span><BoxSmall /></Button>
-            <Button>
-               <Background imageSrc={sample} imageSize="cover" width={150}>
-                  <Layout align="center" justify="center">
-                     <span>With Background</span>
-                  </Layout>
-               </Background>
+            <Button padded={false} color="#666" highlightColor="#999" bgColor="white">
+               <VLayout align="center" justify="center" imageSrc={sample} imageSize="cover" width={150} height="100%">
+                  <span>With Background</span>
+               </VLayout>
             </Button>
          </LI>
          <LI label="Button + Toggle">

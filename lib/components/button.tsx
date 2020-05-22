@@ -9,6 +9,10 @@ interface BaseButtonProps {
    toggle?: boolean;
    isToggled?: boolean;
    reverse?: boolean;
+   padded?: boolean;
+   color?: string;
+   highlightColor?: string;
+   bgColor?: string;
    onClick?: () => void;
    onToggle?: (isToggled: boolean) => void;
 }
@@ -59,7 +63,7 @@ export function Button(props: BaseButtonProps) {
       }
    }, document.body);
 
-   const classes = useStyles();
+   const classes = useStyles(props);
    const buttonType = `button${type ? '-' + type : ''}`;
    const data = `${buttonType}:${isHover ? 'hover-1' : 'hover-0'}:${(isHover || isTempHover) && isDown ? 'down-1' : 'down-0'}:${isToggled ? 'toggled-1' : 'toggled-0'}:${isFocus ? 'focus-1' : 'focus-0'}`;
 
@@ -80,70 +84,73 @@ export function Button(props: BaseButtonProps) {
    )
 }
 
-const useStyles = createUseStyles((theme: Theme) => ({
-   'button': {
-      position: 'relative',
-      borderRadius: theme.borderRadiusLarge,
-      borderColor: theme.borderColor,
-      borderWidth: 1,
-      borderStyle: 'outset',
-      borderRight: `1px solid ${theme.borderColorLight}`,
-      borderBottom: `2px solid ${theme.borderColorDark}`,
-      padding: [theme.paddingSmall, theme.padding],
-      backgroundColor: theme.backgroundColor,
-      fontFamily: 'arena-regular',
-      fontSize: theme.fontSize,
-      color: theme.textColorLight,
-      display: 'inline-block',
-      cursor: 'pointer',
-      userSelect: 'none',
-      '&:focus': {
-         'outline': 0,
-      },
-      '& > *': {
-         width: '100%',
-         height: '100%',
-      },
-      '&[data-arena*="hover-1"]': {
-         extend: 'over',
-      },
-      '&[data-arena*="down-1"]': {
-         extend: 'over',
+const useStyles = (props: BaseButtonProps) => {
+   const { padded = true } = props;
+   return createUseStyles((theme: Theme) => ({
+      'button': {
+         position: 'relative',
+         borderRadius: theme.borderRadius,
          borderColor: theme.borderColor,
-         backgroundColor: theme.backgroundColorDark,
+         borderWidth: 1,
+         borderStyle: 'outset',
+         borderRight: `1px solid ${theme.borderColorLight}`,
+         borderBottom: `2px solid ${theme.borderColorDark}`,
+         padding: padded ? [theme.paddingSmall, theme.padding] : 0,
+         backgroundColor: props.bgColor ? [props.bgColor, '!important'] : theme.backgroundColor,
+         fontFamily: 'arena-regular',
+         fontSize: theme.fontSize,
+         color: props.color ? props.color : theme.textColorLight,
+         display: 'inline-block',
+         cursor: 'pointer',
+         userSelect: 'none',
+         '&:focus': {
+            'outline': 0,
+         },
          '& > *': {
-            position: 'relative',
-            left: 1,
-            top: 1,
-         }
+            width: '100%',
+            height: '100%',
+         },
+         '&[data-arena*="hover-1"]': {
+            extend: 'over',
+         },
+         '&[data-arena*="down-1"]': {
+            extend: 'over',
+            borderColor: theme.borderColor,
+            backgroundColor: theme.backgroundColorDark,
+            '& > *': {
+               position: 'relative',
+               left: 1,
+               top: 1,
+            }
+         },
+         '&[data-arena*="toggled-1"]': {
+            extend: 'toggle',
+         },
+         '&[data-arena*="toggle-1"][data-arena*="hover-1"]': {
+            extend: 'toggle',
+            borderColor: theme.borderColorLight,
+            borderBottom: `2px solid ${theme.backgroundColor}`,
+         },
+         '&[data-arena*="toggle-1"][data-arena*="down-1"]': {
+            extend: 'toggle',
+            backgroundColor: theme.backgroundColorLight,
+         },
+         '&[data-arena*="focus-1"]': {
+            borderBottomColor: theme.accentColor,
+         },
       },
-      '&[data-arena*="toggled-1"]': {
-         extend: 'toggle',
-      },
-      '&[data-arena*="toggle-1"][data-arena*="hover-1"]': {
-         extend: 'toggle',
-         borderColor: theme.borderColorLight,
-         borderBottom: `2px solid ${theme.backgroundColor}`,
-      },
-      '&[data-arena*="toggle-1"][data-arena*="down-1"]': {
-         extend: 'toggle',
+      'over': {
          backgroundColor: theme.backgroundColorLight,
+         color: props.highlightColor ? props.highlightColor : theme.textColorLight,
+         borderColor: theme.borderColorLight,
+         borderBottom: `2px solid ${theme.backgroundColorDark}`,
       },
-      '&[data-arena*="focus-1"]': {
-         borderBottomColor: theme.accentColorDark,
+      'toggle': {
+         borderStyle: 'inset',
+         backgroundColor: theme.backgroundColorDark,
+         color: props.highlightColor ? props.highlightColor : theme.textColor,
+         borderColor: theme.borderColorDark,
+         borderBottom: `2px solid ${theme.backgroundColorDark}`,
       },
-   },
-   'over': {
-      backgroundColor: theme.backgroundColorLight,
-      color: theme.textColorLight,
-      borderColor: theme.borderColorLight,
-      borderBottom: `2px solid ${theme.backgroundColorDark}`,
-   },
-   'toggle': {
-      borderStyle: 'inset',
-      backgroundColor: theme.backgroundColorDark,
-      color: theme.textColor,
-      borderColor: theme.borderColorDark,
-      borderBottom: `2px solid ${theme.backgroundColorDark}`,
-   },
-}));
+   }))();
+};

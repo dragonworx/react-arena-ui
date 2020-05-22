@@ -3,9 +3,10 @@ import { ReactNode } from 'react';
 import { Theme, createUseStyles } from '~lib';
 
 export interface PanelProps {
+   children?: ReactNode;
    title?: string;
    titleColor?: string;
-   children?: ReactNode;
+   padded?: boolean;
 }
 
 export function Panel(props: PanelProps) {
@@ -22,6 +23,7 @@ export function Panel(props: PanelProps) {
 }
 
 const useStyles = (props: PanelProps) => {
+   const { padded = true } = props;
    return createUseStyles((theme: Theme) => ({
       'panel': {
          borderRadius: theme.borderRadius,
@@ -29,9 +31,9 @@ const useStyles = (props: PanelProps) => {
          borderWidth: 1,
          borderStyle: 'outset',
          borderBottom: `2px solid ${theme.borderColorDark}`,
-         padding: theme.padding,
-         paddingTop: theme.padding * 0.8,
-         paddingBottom: theme.padding * 1.2,
+         padding: padded ? theme.padding : 0,
+         paddingTop: padded ? theme.padding : 0,
+         paddingBottom: padded ? theme.padding * 1.2 : 0,
          backgroundColor: theme.backgroundColorLight,
          width: '100%',
          height: '100%',
@@ -45,7 +47,7 @@ const useStyles = (props: PanelProps) => {
             fontWeight: 'bold',
             fontSize: theme.fontSizeSmall,
             fontFamily: 'arena-bold',
-            backgroundColor: props.titleColor ? props.titleColor : theme.backgroundColorLight,
+            backgroundColor: props.titleColor ? props.titleColor : theme.backgroundColor,
             borderRadius: theme.borderRadius,
             padding: [0, theme.padding],
             borderTop: `1px solid ${theme.borderColor}`,

@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
-import { Theme, createUseStyles, Align } from '~lib';
+import { Theme, createUseStyles, Align, css } from '~lib';
 
 export interface LayoutProps {
    children?: ReactNode;
    padded?: boolean;
    padding?: number;
+   innerPadding?: boolean;
    direction?: 'horizontal' | 'vertical';
    reverse?: boolean; 
    wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
@@ -14,6 +15,11 @@ export interface LayoutProps {
    content?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'stretch' | 'baseline' | 'safe' | 'unsafe';
    height?: string | number;
    width?: string | number;
+   bgColor?: string;
+   imageSrc?: string;
+   imageSize?: string;
+   imageRepeat?: 'no-repeat' | 'repeat-x' | 'repeat-y';
+   imagePos?: string;
 }
 
 interface Lookup {
@@ -45,7 +51,7 @@ export function Layout(props: LayoutProps) {
 
    const classes = useStyles(props);
 
-   return <div className={classes.layout} data-arena={`layout:${direction}`}>{ children }</div>
+   return <div className={css(classes.layout, classes.background)} data-arena={`layout:${direction}`}>{ children }</div>
 }
 
 type HVLayoutProps = Omit<LayoutProps, 'direction'>;
@@ -63,6 +69,7 @@ const useStyles = (props: LayoutProps) => {
    return createUseStyles((theme: Theme) => {
       let style = {
          display: 'flex',
+         borderRadius: theme.borderRadius,
          flexDirection: direction ? directionPropToFlexDirection[direction] : undefined,
          flexWrap: props.wrap,
          justifyContent: props.justify ? propToFlexValue[props.justify] : undefined,
@@ -70,6 +77,7 @@ const useStyles = (props: LayoutProps) => {
          alignContent: props.content,
          width: props.width,
          height: props.height,
+         padding: props.innerPadding ? props.padding ? props.padding : theme.padding : 0,
       } as any;
       if (props.padded || props.padding && props.padding > 0) {
          const marginKey = directionPropToMargin[direction || 'horizontal'];
@@ -85,6 +93,13 @@ const useStyles = (props: LayoutProps) => {
       }
       return {
          'layout': style,
+         'background': {
+            backgroundColor: props.bgColor ? props.bgColor : undefined,
+            backgroundImage: props.imageSrc ? `url(${props.imageSrc})` : undefined,
+            backgroundSize: props.imageSrc && props.imageSize ? props.imageSize : 'auto',
+            backgroundRepeat: props.imageRepeat ? props.imageRepeat : 'repeat',
+            backgroundPosition: props.imagePos ? props.imagePos : 'top left',
+         }
       };
    })();
 };
