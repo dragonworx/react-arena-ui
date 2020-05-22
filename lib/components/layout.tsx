@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
-import { Theme, createUseStyles, Align, css } from '~lib';
+import { Theme, createUseStyles, Align, Direction, css } from '~lib';
 
 export interface LayoutProps {
    children?: ReactNode;
    padded?: boolean;
    padding?: number;
    innerPadding?: boolean;
-   direction?: 'horizontal' | 'vertical';
+   direction?: Direction;
    reverse?: boolean; 
    wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
    justify?: Align;
@@ -15,10 +15,14 @@ export interface LayoutProps {
    content?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'stretch' | 'baseline' | 'safe' | 'unsafe';
    height?: string | number;
    width?: string | number;
+   color?: string;
    bgColor?: string;
    imageSrc?: string;
    imageSize?: string;
    imageRepeat?: 'no-repeat' | 'repeat-x' | 'repeat-y';
+   gradientStart?: string;
+   gradientStop?: string;
+   gradientAngle?: number;
    imagePos?: string;
 }
 
@@ -66,6 +70,11 @@ export function VLayout(props: HVLayoutProps) {
 
 const useStyles = (props: LayoutProps) => {
    const direction = `${props.direction || 'horizontal'}${props.reverse ? '-reverse' : ''}`;
+   const { gradientStart, gradientStop, gradientAngle = 0 } = props;
+   let gradient: string | undefined = undefined;
+   if (gradientStart && gradientStop) {
+      gradient = `linear-gradient(${gradientAngle + 180}deg, ${gradientStart} 0, ${gradientStop} 100%)`;
+   }
    return createUseStyles((theme: Theme) => {
       let style = {
          display: 'flex',
@@ -94,11 +103,13 @@ const useStyles = (props: LayoutProps) => {
       return {
          'layout': style,
          'background': {
+            color: props.color ? props.color : undefined,
             backgroundColor: props.bgColor ? props.bgColor : undefined,
             backgroundImage: props.imageSrc ? `url(${props.imageSrc})` : undefined,
             backgroundSize: props.imageSrc && props.imageSize ? props.imageSize : 'auto',
             backgroundRepeat: props.imageRepeat ? props.imageRepeat : 'repeat',
             backgroundPosition: props.imagePos ? props.imagePos : 'top left',
+            background: gradient,
          }
       };
    })();

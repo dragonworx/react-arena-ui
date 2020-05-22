@@ -6,6 +6,7 @@ export interface PanelProps {
    children?: ReactNode;
    title?: string;
    titleColor?: string;
+   titleBg?: string;
    padded?: boolean;
 }
 
@@ -43,11 +44,11 @@ const useStyles = (props: PanelProps) => {
          marginTop: props.title ? theme.padding * 1 : 0,
    
          '& legend': {
-            color: theme.textColorLight,
             fontWeight: 'bold',
             fontSize: theme.fontSizeSmall,
             fontFamily: 'arena-bold',
-            backgroundColor: props.titleColor ? props.titleColor : theme.backgroundColor,
+            color: props.titleColor ? props.titleColor : theme.textColorLight,
+            backgroundColor: props.titleBg ? props.titleBg : theme.backgroundColor,
             borderRadius: theme.borderRadius,
             padding: [0, theme.padding],
             borderTop: `1px solid ${theme.borderColor}`,
@@ -55,6 +56,7 @@ const useStyles = (props: PanelProps) => {
             top: theme.padding * -1.5,
             left: theme.padding,
             zIndex: 1,
+            boxShadow: `0px 2px 2px 2px rgba(0,0,0,0.1)`,
          },
       }
    }))();
