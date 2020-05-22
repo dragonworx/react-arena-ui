@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
 import { Layout } from './layout';
-import { Theme, createUseStyles } from '~lib';
+import { Theme, createUseStyles, css } from '~lib';
 
 export interface LabelProps {
    children?: ReactNode;
@@ -26,7 +26,7 @@ export function Label(props: LabelProps) {
    return (
       <div className={classes.label}>
          <Layout direction={position === 'left' || position === 'right' ? 'horizontal' : 'vertical'} reverse={position === 'right' || position === 'bottom'} align={alignItems}>
-            <div className={classes.text} data-arena-type="label-text" data-arena-align={align}>{text}</div>
+            <div className={classes.text} data-arena-id={`label-text:${align}`}>{text}</div>
             {children}
          </Layout>
       </div>
@@ -37,22 +37,22 @@ const useStyles = (props: LabelProps) => {
    return createUseStyles((theme: Theme) => {
       let style = {
          display: 'inline-block',
-         '& *[data-arena-type="layout"][data-arena-direction="horizontal"]': {
-            '& > *[data-arena-type="label-text"][data-arena-align="near"]': {
+         '& *[data-arena-id="layout:horizontal"]': {
+            '& > *[data-arena-id="label-text:near"]': {
                marginTop: 0,
                alignSelf: 'flex-start',
             },
-            '& > *[data-arena-type="label-text"][data-arena-align="far"]': {
+            '& > *[data-arena-id="label-text:far"]': {
                marginBottom: 0,
                alignSelf: 'flex-end',
             },
          },
-         '& *[data-arena-type="layout"][data-arena-direction="vertical"]': {
-            '& > *[data-arena-type="label-text"][data-arena-align="near"]': {
+         '& *[data-arena-id="layout:vertical"]': {
+            '& > *[data-arena-id="label-text:near"]': {
                marginLeft: 0,
                alignSelf: 'flex-start',
             },
-            '& > *[data-arena-type="label-text"][data-arena-align="far"]': {
+            '& > *[data-arena-id="label-text:far"]': {
                marginRight: 0,
                alignSelf: 'flex-end',
             },

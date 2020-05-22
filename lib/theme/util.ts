@@ -28,7 +28,7 @@ export interface Theme {
    fontSizeSmall: number;
    fontSize: number;
    fontSizeLarge: number;
-   fonts?: FontFace[]
+   fonts?: FontFace[],
 }
 
 export type ThemeProps = Pick<Theme, 'backgroundColor' | 'borderRadius' | 'borderColor' | 'textColor' | 'accentColor' | 'fontSize' | 'padding' | 'accentColor' | 'fonts'>;

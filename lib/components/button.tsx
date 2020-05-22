@@ -79,6 +79,9 @@ export function BaseButton(props: BaseButtonProps) {
 
 const useStyles = createUseStyles((theme: Theme) => ({
    'button': {
+      '&:focus': {
+         'outline': `${theme.accentColor} outset 1px`,
+      },
       '& > *': {
          width: '100%',
          height: '100%',
