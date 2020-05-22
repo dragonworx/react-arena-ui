@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
-import { Theme, createUseStyles } from '~lib';
+import { Theme, createUseStyles, Align } from '~lib';
 
 export interface LayoutProps {
    children?: ReactNode;
@@ -9,9 +9,11 @@ export interface LayoutProps {
    direction?: 'horizontal' | 'vertical';
    reverse?: boolean; 
    wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
-   justify?: 'near' | 'center' | 'far';
-   align?: 'near' | 'center' | 'far';
+   justify?: Align;
+   align?: Align;
    content?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'stretch' | 'baseline' | 'safe' | 'unsafe';
+   height?: string | number;
+   width?: string | number;
 }
 
 interface Lookup {
@@ -66,6 +68,8 @@ const useStyles = (props: LayoutProps) => {
          justifyContent: props.justify ? propToFlexValue[props.justify] : undefined,
          alignItems: props.align ? propToFlexValue[props.align] : undefined,
          alignContent: props.content,
+         width: props.width,
+         height: props.height,
       } as any;
       if (props.padded || props.padding && props.padding > 0) {
          const marginKey = directionPropToMargin[direction || 'horizontal'];
@@ -75,7 +79,7 @@ const useStyles = (props: LayoutProps) => {
                [marginKey]: props.padding ? props.padding : theme.padding,
             },
             '& > :last-child': {
-               [marginKey]: 0,
+               [marginKey]: [0, '!important'],
             }
          }
       }

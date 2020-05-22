@@ -11,7 +11,7 @@ export const testTheme = createTheme({
    textColor: '#666',
    accentColor: '#ec9e0f',
    fontSize: 12,
-   padding: 5,
+   padding: 8,
    fonts: [
       {
          fontFamily: 'arena-light',

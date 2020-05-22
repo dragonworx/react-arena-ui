@@ -4,8 +4,13 @@ import { css, useMouseUpEvent,useKeyDownEvent, useKeyUpEvent, Keys, HLayout, cre
 
 interface BaseButtonProps {
    children?: ReactNode;
+   type?: string;
    className?: string;
-   isToggle?: boolean;
+   toggle?: boolean;
+   isToggled?: boolean;
+   reverse?: boolean;
+   onClick?: () => void;
+   onToggle?: (isToggled: boolean) => void;
 }
 
 export type ButtonProps = Omit<BaseButtonProps, 'className'>;
@@ -13,8 +18,8 @@ export type ButtonProps = Omit<BaseButtonProps, 'className'>;
 const isAcceptKey = (e: KeyboardEvent) => e.keyCode === Keys.SPACE || e.keyCode === Keys.ENTER;
 
 export function Button(props: BaseButtonProps) {
-   const { children, className, isToggle = false } = props;
-   const [isToggled, setIsToggled] = useState(false);
+   const { children, type, className, toggle = false, isToggled: _isToggled = false, reverse = false, onClick, onToggle } = props;
+   const [isToggled, setIsToggled] = useState(_isToggled);
    const [isHover, setIsHover] = useState(false);
    const [isTempHover, setIsTempHover] = useState(false);
    const [isDown, setIsDown] = useState(false);
@@ -25,8 +30,11 @@ export function Button(props: BaseButtonProps) {
    const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => setIsDown(true);
    const onMouseUp = (e: React.MouseEvent<HTMLDivElement>) => onUp();
    const onUp = () => {
-      if (isToggle) {
-         setIsToggled(!isToggled);
+      onClick && onClick();
+      if (toggle) {
+         const isNowToggled = !isToggled;
+         setIsToggled(isNowToggled);
+         onToggle && onToggle(isNowToggled);
       }
    };
    const onFocus = (e: React.FocusEvent<HTMLDivElement>) => setIsFocus(true);
@@ -52,7 +60,8 @@ export function Button(props: BaseButtonProps) {
    }, document.body);
 
    const classes = useStyles();
-   const data = `button:${isHover ? 'hover-1' : 'hover-0'}:${(isHover || isTempHover) && isDown ? 'down-1' : 'down-0'}:${isToggled ? 'toggled-1' : 'toggled-0'}:${isFocus ? 'focus-1' : 'focus-0'}`;
+   const buttonType = `button${type ? '-' + type : ''}`;
+   const data = `${buttonType}:${isHover ? 'hover-1' : 'hover-0'}:${(isHover || isTempHover) && isDown ? 'down-1' : 'down-0'}:${isToggled ? 'toggled-1' : 'toggled-0'}:${isFocus ? 'focus-1' : 'focus-0'}`;
 
    return (
       <div
@@ -66,13 +75,14 @@ export function Button(props: BaseButtonProps) {
          tabIndex={0}
          data-arena={data}
       >
-         <HLayout padded align="center">{children}</HLayout>
+         <HLayout padded align="center" justify="center" reverse={reverse}>{children}</HLayout>
       </div>
    )
 }
 
 const useStyles = createUseStyles((theme: Theme) => ({
    'button': {
+      position: 'relative',
       borderRadius: theme.borderRadiusLarge,
       borderColor: theme.borderColor,
       borderWidth: 1,

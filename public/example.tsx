@@ -92,6 +92,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
          bottom: 0,
       },
       '.box': {
+         display: 'inline-block',
          backgroundImage: `url(${sample})`,
          backgroundSize: 'cover',
          border: '1px solid white',
