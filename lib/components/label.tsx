@@ -9,6 +9,7 @@ export interface LabelProps {
    text: string;
    position?: Position;
    align?: Align;
+   onClick?: () => void;
 }
 
 const alignToFlexAlign = {
@@ -18,7 +19,7 @@ const alignToFlexAlign = {
 } as any;
 
 export function Label(props: LabelProps) {
-   const { children, text, position = 'left', align = 'center' } = props;
+   const { children, text, position = 'left', align = 'center', onClick } = props;
 
    const classes = useStyles(props);
 
@@ -27,7 +28,7 @@ export function Label(props: LabelProps) {
    return (
       <div className={classes.label} data-arena={`label:${position}:${align}`}>
          <Layout direction={position === 'left' || position === 'right' ? 'horizontal' : 'vertical'} reverse={position === 'right' || position === 'bottom'} align={alignItems} padded={false}>
-            <div className={classes.text} data-arena={`label-text:${align}`}>{text}</div>
+            <div className={classes.text} data-arena={`label-text:${align}`} onClick={onClick}>{text}</div>
             {children}
          </Layout>
       </div>
@@ -39,7 +40,7 @@ const useStyles = (props: LabelProps) => {
    return createUseStyles((theme: Theme) => {
       let style = {
          display: 'inline-block',
-         cursor: 'default',
+         cursor: props.onClick ? 'pointer' : 'default',
          '&[data-arena*="label:top"] *[data-arena*="label-text"]': {
             marginTop: [0, '!important'],
          },

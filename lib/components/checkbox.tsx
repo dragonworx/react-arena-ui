@@ -1,26 +1,68 @@
 import * as React from 'react';
+import { useState, MutableRefObject } from 'react';
 import { Theme, createUseStyles, Label, Position, useTheme } from '~lib';
 import { Button } from './button';
 
 export interface CheckboxProps {
    checked?: boolean;
    label?: string;
+   value?: any;
    position?: Position;
+   enableLabelClick?: boolean;
+   onClick?: (value: any) => void;
 }
 
 export function Checkbox(props: CheckboxProps) {
-   const { label, checked = false, position } = props;
+   const { label, checked: _checked = false, position, enableLabelClick = true, onClick, value } = props;
+   const [ checked, setChecked ] = useState(_checked);
+   const [ ref, setRef ] = useState<MutableRefObject<HTMLDivElement>>();
    const classes = useStyles(props);
    const theme = useTheme() as Theme;
 
+   const onLabelClicked = () => {
+      if (enableLabelClick) {
+         setChecked(!checked);
+         ref && ref.current.focus();
+      }
+      onClick && onClick(value);
+   
+   };
+   const onClicked = () => {
+      onClick && onClick(value);
+   }
+
+   const onRef = (ref: MutableRefObject<HTMLDivElement>) => setRef(ref);
+
    if (label) {
       return (
-         <Label text={label} align="center" position={position}>
-            <Button type="checkbox" className={classes.checkbox} toggle={true} isToggled={checked} width={theme.padding * 2} height={theme.padding * 2.1}>X</Button>
+         <Label text={label} align="center" position={position} onClick={onLabelClicked}>
+            <Button 
+               onRef={onRef} 
+               type="checkbox" 
+               className={classes.checkbox} 
+               toggle={true} 
+               isToggled={checked} 
+               width={theme.padding * 2} 
+               height={theme.padding * 2.1}
+               onClick={onClicked}
+            >
+               X
+            </Button>
          </Label>
       )
    } else {
-      return <Button type="checkbox" className={classes.checkbox} toggle={true} isToggled={checked} width={theme.padding * 2} height={theme.padding * 2.1}>X</Button>
+      return (
+         <Button 
+            type="checkbox" 
+            className={classes.checkbox} 
+            toggle={true} 
+            isToggled={checked} 
+            width={theme.padding * 2} 
+            height={theme.padding * 2.1}
+            onClick={onClicked}
+         >
+            X
+         </Button>)
    }
 }
 

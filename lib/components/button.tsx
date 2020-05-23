@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, ReactNode, useEffect } from 'react';
+import { useState, ReactNode, useEffect, useRef, MutableRefObject } from 'react';
 import { css, useMouseUpEvent,useKeyDownEvent, useKeyUpEvent, Keys, HLayout, createUseStyles, Theme } from '~lib';
 
 interface BaseButtonProps {
@@ -19,6 +19,7 @@ interface BaseButtonProps {
    height?: string | number;
    onClick?: () => void;
    onToggle?: (isToggled: boolean) => void;
+   onRef?: (ref: MutableRefObject<HTMLDivElement>) => void;
 }
 
 export type ButtonProps = Omit<BaseButtonProps, 'className'>;
@@ -26,12 +27,13 @@ export type ButtonProps = Omit<BaseButtonProps, 'className'>;
 const isAcceptKey = (e: KeyboardEvent) => e.keyCode === Keys.SPACE || e.keyCode === Keys.ENTER;
 
 export function Button(props: BaseButtonProps) {
-   const { children, type, className, toggle = false, isToggled: _isToggled = false, canUnToggle = true, reverse = false, onClick, onToggle } = props;
+   const { children, type, className, toggle = false, isToggled: _isToggled = false, canUnToggle = true, reverse = false, onClick, onToggle, onRef } = props;
    const [isToggled, setIsToggled] = useState(_isToggled);
    const [isHover, setIsHover] = useState(false);
    const [isTempHover, setIsTempHover] = useState(false);
    const [isDown, setIsDown] = useState(false);
    const [isFocus, setIsFocus] = useState(false);
+   const ref = useRef(null);
 
    useEffect(() => {
       setIsDown(false);
@@ -75,12 +77,17 @@ export function Button(props: BaseButtonProps) {
       }
    }, document.body);
 
+   useEffect(() => {
+      onRef && ref && onRef(ref as unknown as MutableRefObject<HTMLDivElement>);
+   }, [ref]);
+
    const classes = useStyles(props);
    const buttonType = `button${type ? '-' + type : ''}`;
    const data = `${buttonType}:${isHover ? 'hover-1' : 'hover-0'}:${(isHover || isTempHover) && isDown ? 'down-1' : 'down-0'}:${isToggled ? 'toggled-1' : 'toggled-0'}:${isFocus ? 'focus-1' : 'focus-0'}`;
 
    return (
       <div
+         ref={ref}
          className={css(className, classes.button)}
          onMouseOver={onMouseOver}
          onMouseOut={onMouseOut}
