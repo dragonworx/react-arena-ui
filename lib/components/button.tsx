@@ -15,6 +15,8 @@ interface BaseButtonProps {
    highlightColor?: string;
    bgColor?: string;
    radius?: number;
+   width?: string | number;
+   height?: string | number;
    onClick?: () => void;
    onToggle?: (isToggled: boolean) => void;
 }
@@ -90,7 +92,7 @@ export function Button(props: BaseButtonProps) {
 }
 
 const useStyles = (props: BaseButtonProps) => {
-   const { padded = true } = props;
+   const { padded = true, height = '100%' } = props;
    return createUseStyles((theme: Theme) => ({
       'button': {
          position: 'relative',
@@ -104,10 +106,13 @@ const useStyles = (props: BaseButtonProps) => {
          backgroundColor: props.bgColor ? [props.bgColor, '!important'] : theme.backgroundColor,
          fontFamily: 'arena-regular',
          fontSize: theme.fontSize,
-         color: props.color ? props.color : theme.textColorLight,
+         color: props.color ? props.color : theme.textColor,
          display: 'inline-block',
          cursor: 'pointer',
          userSelect: 'none',
+         boxSizing: 'border-box',
+         width: props.width,
+         height,
          '&:focus': {
             'outline': 0,
          },
@@ -131,17 +136,17 @@ const useStyles = (props: BaseButtonProps) => {
          '&[data-arena*="toggled-1"]': {
             extend: 'toggle',
          },
-         '&[data-arena*="toggle-1"][data-arena*="hover-1"]': {
+         '&[data-arena*="toggled-1"][data-arena*="hover-1"]': {
             extend: 'toggle',
             borderColor: theme.borderColorLight,
             borderBottom: `2px solid ${theme.backgroundColor}`,
          },
-         '&[data-arena*="toggle-1"][data-arena*="down-1"]': {
+         '&[data-arena*="toggled-1"][data-arena*="down-1"]': {
             extend: 'toggle',
             backgroundColor: theme.backgroundColorLight,
          },
          '&[data-arena*="focus-1"]': {
-            borderBottomColor: theme.accentColor,
+            borderBottomColor: [theme.accentColor, '!important'],
          },
       },
       'over': {
@@ -153,7 +158,7 @@ const useStyles = (props: BaseButtonProps) => {
       'toggle': {
          borderStyle: 'inset',
          backgroundColor: theme.backgroundColorDark,
-         color: props.highlightColor ? props.highlightColor : theme.textColor,
+         color: props.highlightColor ? props.highlightColor : theme.textColorLight,
          borderColor: theme.borderColorDark,
          borderBottom: `2px solid ${theme.backgroundColorDark}`,
       },

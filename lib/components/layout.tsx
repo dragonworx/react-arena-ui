@@ -70,8 +70,8 @@ export function VLayout(props: HVLayoutProps) {
 }
 
 const useStyles = (props: LayoutProps) => {
+   const { gradientStart, gradientStop, gradientAngle = 0, padded = true } = props;
    const direction = `${props.direction || 'horizontal'}${props.reverse ? '-reverse' : ''}`;
-   const { gradientStart, gradientStop, gradientAngle = 0 } = props;
    let gradient: string | undefined = undefined;
    if (gradientStart && gradientStop) {
       gradient = `linear-gradient(${gradientAngle + 180}deg, ${gradientStart} 0, ${gradientStop} 100%)`;
@@ -89,7 +89,7 @@ const useStyles = (props: LayoutProps) => {
          height: props.height,
          padding: props.innerPadding ? props.padding ? props.padding : theme.padding : 0,
       } as any;
-      if (props.padded || props.padding && props.padding > 0) {
+      if (padded || props.padding && props.padding > 0) {
          const marginKey = directionPropToMargin[direction || 'horizontal'];
          style = {
             ...style,

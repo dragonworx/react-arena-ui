@@ -11,12 +11,12 @@ export function PanelExamples() {
       <ul>
          <LI label="Default" height={50}>
             <Panel>
-               <HLayout padded>
+               <HLayout>
                   <span>Panel content...</span>
                </HLayout>
             </Panel>
             <Panel>
-               <HLayout padded>
+               <HLayout>
                   <BoxSmall />
                   <span>Panel content...</span>
                </HLayout>
@@ -25,13 +25,13 @@ export function PanelExamples() {
          <LI label="With Title &amp; Content">
             <HLayout width="100%" height={100}>
                <Panel title="Panel Title">
-                  <HLayout padded>
+                  <HLayout>
                      <BoxMedium />
                      <span>Panel content...</span>
                   </HLayout>
                </Panel>
                <Panel border={false} radius={0}>
-                  <HLayout padded>
+                  <HLayout>
                      <BoxMedium />
                      <span>Panel content no border...</span>
                   </HLayout>

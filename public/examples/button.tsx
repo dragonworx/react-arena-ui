@@ -8,7 +8,7 @@ const sample = require('../img/sample.png');
 export function ButtonExamples() {
    return (
       <ul>
-         <LI label="Button" height={35}>
+         <LI label="Button" height={45}>
             <Button onClick={() => console.log('Button Clicked!')}>Button (onClick)</Button>
             <Button><span>Button</span><BoxSmall /></Button>
             <Button padded={false} color="#666" highlightColor="#999" bgColor="white">
@@ -17,7 +17,7 @@ export function ButtonExamples() {
                </VLayout>
             </Button>
          </LI>
-         <LI label="Button + Toggle">
+         <LI label="Button + Toggle" height={45}>
             <Button toggle><span>Button</span></Button>
             <Button toggle><span>Button</span><BoxSmall /></Button>
             <Button toggle isToggled={true} onToggle={(isToggled: boolean) => console.log('Button Toggled!', isToggled)}>Toggled (onToggle)</Button>

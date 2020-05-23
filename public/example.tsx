@@ -199,7 +199,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
       flexGrow: 1,
       height: '100%',
       overflow: 'auto',
-      padding: theme.paddingSmall,
+      padding: theme.padding,
 
       '& ul': {
          padding: 0,
@@ -208,7 +208,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
          '& li': {
             listStyle: 'none',
             padding: 0,
-            marginBottom: theme.padding * 2,
+            marginBottom: theme.padding,
 
             '& label': {
                fontFamily: 'arena-light',

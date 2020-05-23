@@ -15,7 +15,7 @@ export function LI(props: ListItemProps) {
    return (
       <li>
          <label>{label}</label>
-         <Layout direction={direction} padded padding={padding} align="near" height={height}>
+         <Layout direction={direction} padding={padding} align="near" height={height}>
             {children}
          </Layout>
       </li>
