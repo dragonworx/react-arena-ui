@@ -50,7 +50,7 @@ const useStyles = (props: PanelProps) => {
             fontSize: theme.fontSizeSmall,
             fontFamily: 'arena-bold',
             color: props.titleColor ? props.titleColor : theme.textColorLight,
-            backgroundColor: props.titleBg ? props.titleBg : theme.backgroundColor,
+            backgroundColor: props.titleBg ? props.titleBg : theme.backgroundColorLight,
             borderRadius: theme.borderRadius,
             padding: [0, theme.padding],
             borderTop: `1px solid ${theme.borderColor}`,
@@ -60,6 +60,7 @@ const useStyles = (props: PanelProps) => {
             zIndex: 1,
             height: theme.padding * 2,
             boxShadow: `0px 2px 2px 2px rgba(0,0,0,0.1)`,
+            textShadow: `1px 1px 2px rgba(0,0,0,0.3)`,
          },
       }
    }))();

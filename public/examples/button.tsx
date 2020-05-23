@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Checkbox, Radio, HLayout, VLayout } from '~lib';
+import { Button, Checkbox, Radio, HLayout, VLayout, RadioGroup } from '~lib';
 import { LI } from './listItem';
 import { BoxSmall } from './box';
 
@@ -23,31 +23,43 @@ export function ButtonExamples() {
             <Button toggle isToggled={true} onToggle={(isToggled: boolean) => console.log('Button Toggled!', isToggled)}>Toggled (onToggle)</Button>
          </LI>
          <LI label="Checkbox" direction="vertical">
-            <HLayout padded>
+            <HLayout>
                <Checkbox />
                <Checkbox checked={true} />
             </HLayout>
-            <HLayout padded>
+            <HLayout>
                <Checkbox label="Left Label" />
                <Checkbox label="Right Label" position="right" />
             </HLayout>
-            <HLayout padded>
+            <HLayout>
                <Checkbox label="Top Label" position="top" />
                <Checkbox label="Bottom Label" position="bottom" />
             </HLayout>
          </LI>
          <LI label="Radio" direction="vertical">
-            <HLayout padded>
+            <HLayout>
                <Radio />
                <Radio checked={true} />
             </HLayout>
-            <HLayout padded>
+            <HLayout>
                <Radio label="Left Label" />
                <Radio label="Right Label" position="right" />
             </HLayout>
-            <HLayout padded>
+            <HLayout>
                <Radio label="Top Label" position="top" />
                <Radio label="Bottom Label" position="bottom" />
+            </HLayout>
+         </LI>
+         <LI label="RadioGroup Vertical" direction="vertical">
+            <HLayout>
+               <RadioGroup options={['Lef1', 'Left2', 'Left3']} />
+               <RadioGroup options={['Right1', 'Right2', 'Right3']} position="right" defaultValue="Right2" />
+            </HLayout>
+         </LI>
+         <LI label="RadioGroup Horizontal" direction="horizontal">
+            <HLayout>
+               <RadioGroup options={['Top1', 'Top2', 'Top3']} direction="horizontal" />
+               <RadioGroup options={['Bottom1', 'Bottom2', 'Bottom3']} direction="horizontal" position="bottom" defaultValue="Bottom2" />
             </HLayout>
          </LI>
       </ul>

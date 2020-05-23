@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ReactNode } from 'react';
 import { Layout } from './layout';
 import { Theme, createUseStyles, Position, Align } from '~lib';
+import { ThemeProvider } from 'react-jss';
 
 export interface LabelProps {
    children?: ReactNode;
@@ -25,7 +26,7 @@ export function Label(props: LabelProps) {
 
    return (
       <div className={classes.label} data-arena={`label:${position}:${align}`}>
-         <Layout direction={position === 'left' || position === 'right' ? 'horizontal' : 'vertical'} reverse={position === 'right' || position === 'bottom'} align={alignItems} padded>
+         <Layout direction={position === 'left' || position === 'right' ? 'horizontal' : 'vertical'} reverse={position === 'right' || position === 'bottom'} align={alignItems} padded={false}>
             <div className={classes.text} data-arena={`label-text:${align}`}>{text}</div>
             {children}
          </Layout>
@@ -34,6 +35,7 @@ export function Label(props: LabelProps) {
 }
 
 const useStyles = (props: LabelProps) => {
+   const { position = 'left' } = props;
    return createUseStyles((theme: Theme) => {
       let style = {
          display: 'inline-block',
@@ -78,7 +80,10 @@ const useStyles = (props: LabelProps) => {
             fontSize: theme.fontSizeSmall,
             fontFamily: 'arena-regular',
             textShadow: '2px 2px 2px rgba(0, 0, 0, 0.3)',
-            margin: theme.padding,
+            margin: [
+               position === 'top' || position === 'bottom' ? theme.padding : 0,
+               position === 'left' || position === 'right' ? theme.padding : 0,
+            ],
          }
       };
    })();

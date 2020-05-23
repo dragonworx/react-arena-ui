@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, ReactNode } from 'react';
+import { useState, ReactNode, useEffect } from 'react';
 import { css, useMouseUpEvent,useKeyDownEvent, useKeyUpEvent, Keys, HLayout, createUseStyles, Theme } from '~lib';
 
 interface BaseButtonProps {
@@ -32,6 +32,11 @@ export function Button(props: BaseButtonProps) {
    const [isTempHover, setIsTempHover] = useState(false);
    const [isDown, setIsDown] = useState(false);
    const [isFocus, setIsFocus] = useState(false);
+
+   useEffect(() => {
+      setIsDown(false);
+      setIsToggled(_isToggled);
+   }, [_isToggled])
 
    const onMouseOver = (e: React.MouseEvent<HTMLDivElement>) => setIsHover(true);
    const onMouseOut = (e: React.MouseEvent<HTMLDivElement>) => setIsHover(false);
