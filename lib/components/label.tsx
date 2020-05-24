@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
 import { Layout } from './layout';
-import { Theme, createUseStyles, Position, Align, alignToFlexProp } from '~lib';
+import { Theme, createUseStyles, Position, Align } from '~lib';
 
 export interface LabelProps {
    children?: ReactNode;
@@ -11,12 +11,18 @@ export interface LabelProps {
    onClick?: () => void;
 }
 
+const alignToFlexAlign = {
+   'near': 'flex-start',
+   'center': 'center',
+   'far': 'flex-end',
+} as any;
+
 export function Label(props: LabelProps) {
    const { children, text, position = 'left', align = 'center', onClick } = props;
 
    const classes = useStyles(props);
 
-   const alignItems = alignToFlexProp[align];
+   const alignItems = alignToFlexAlign[align];
 
    return (
       <div className={classes.label} data-arena={`label:${position}:${align}`}>

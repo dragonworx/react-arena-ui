@@ -4,3 +4,4 @@ export * from './label';
 export * from './button';
 export * from './checkbox';
 export * from './radio';
+export * from './expandButton';

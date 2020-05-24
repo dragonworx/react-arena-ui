@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ReactNode } from 'react';
-import { Theme, createUseStyles } from '~lib';
+import { ReactNode, useState, useEffect, useRef } from 'react';
+import { Theme, createUseStyles, useTheme } from '~lib';
 
 export interface Props {
    children?: ReactNode;
@@ -10,6 +10,7 @@ export function Component(props: Props) {
    const { children } = props;
 
    const classes = useStyles(props);
+   const theme = useTheme() as Theme;
 
    return (
       <div>{children}</div>
@@ -17,6 +18,7 @@ export function Component(props: Props) {
 }
 
 const useStyles = (props: Props) => {
+   const {} = props;
    return createUseStyles((theme: Theme) => ({
 
    }))();

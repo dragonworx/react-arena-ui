@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Checkbox, Radio, HLayout, VLayout, RadioGroup } from '~lib';
+import { Button, Checkbox, Radio, HLayout, VLayout, RadioGroup, ExpandButton } from '~lib';
 import { LI } from './listItem';
 import { BoxSmall } from './box';
 
@@ -60,6 +60,13 @@ export function ButtonExamples() {
             <HLayout>
                <RadioGroup options={['Top1', 'Top2', 'Top3']} direction="horizontal" />
                <RadioGroup options={['Bottom1', 'Bottom2', 'Bottom3']} direction="horizontal" position="bottom" defaultValue="Bottom2" />
+            </HLayout>
+         </LI>
+         <LI label="Expand Button">
+            <HLayout align="center">
+               <ExpandButton />
+               <ExpandButton expanded={true} />
+               <ExpandButton size={20} />
             </HLayout>
          </LI>
       </ul>
