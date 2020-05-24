@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Label, Layout } from '~lib';
+import { Label, Layout, Title } from '~lib';
 import { LI } from './listItem';
 import { BoxMedium } from './box';
 
@@ -37,6 +37,11 @@ export function LabelExamples() {
                <Label text="Far" position="bottom" align="far"><BoxMedium /></Label>
             </Layout>
          </LI>
+         <li>
+            <Title text="Title (Default - Near):" />
+            <Title text="Title (Center):" align="center" />
+            <Title text="Title (Right):" align="right" />
+         </li>
       </ul>
    )
 }

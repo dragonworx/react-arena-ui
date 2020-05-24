@@ -209,23 +209,6 @@ const useStyles = createUseStyles((theme: Theme) => ({
             listStyle: 'none',
             padding: 0,
             marginBottom: theme.padding,
-
-            '& label': {
-               fontFamily: 'arena-light',
-               fontSize: theme.fontSize,
-               color: theme.textColor,
-               textShadow: '0 3px 2px rgba(0,0,0,0.3)',
-               marginBottom: theme.padding,
-               display: 'block',
-               backgroundColor: theme.backgroundColorDark,
-               padding: '3px 7px',
-               borderRadius: 5,
-               borderBottom: `1px solid ${theme.accentColor}`,
-            },
-   
-            '& label:after': {
-               content: '":"',
-            }
          }
       }
    }

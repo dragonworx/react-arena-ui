@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Layout } from '~lib';
+import { Layout, Title } from '~lib';
 
 export interface ListItemProps {
    children: React.ReactNode;
@@ -14,7 +14,7 @@ export function LI(props: ListItemProps) {
 
    return (
       <li>
-         <label>{label}</label>
+         <Title text={`${label}:`} />
          <Layout direction={direction} padding={padding} align="near" height={height}>
             {children}
          </Layout>

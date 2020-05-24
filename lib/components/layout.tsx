@@ -31,20 +31,20 @@ interface Lookup {
    [key: string]: string;
 }
 
-const directionPropToFlexDirection = {
+export const directionPropToFlexDirection = {
    'horizontal': 'row',
    'horizontal-reverse': 'row-reverse',
    'vertical': 'column',
    'vertical-reverse': 'column-reverse',
 } as Lookup;
 
-const propToFlexValue = {
+export const alignToFlexProp = {
    'near': 'flex-start',
    'center': 'center',
    'far': 'flex-end',
 } as Lookup;
 
-const directionPropToMargin = {
+export const directionPropToMargin = {
    'horizontal': 'marginRight',
    'horizontal-reverse': 'marginLeft',
    'vertical': 'marginBottom',
@@ -82,8 +82,8 @@ const useStyles = (props: LayoutProps) => {
          borderRadius: typeof props.radius === 'number' ? props.radius : theme.borderRadius,
          flexDirection: direction ? directionPropToFlexDirection[direction] : undefined,
          flexWrap: props.wrap,
-         justifyContent: props.justify ? propToFlexValue[props.justify] : undefined,
-         alignItems: props.align ? propToFlexValue[props.align] : undefined,
+         justifyContent: props.justify ? alignToFlexProp[props.justify] : undefined,
+         alignItems: props.align ? alignToFlexProp[props.align] : undefined,
          alignContent: props.content,
          width: props.width,
          height: props.height,
