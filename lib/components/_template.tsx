@@ -17,9 +17,9 @@ export function Component(props: Props) {
    )
 }
 
-const useStyles = (props: Props) => {
+const useStyles = (props: Props) => createUseStyles((theme: Theme) => {
    const {} = props;
-   return createUseStyles((theme: Theme) => ({
+   return {
 
-   }))();
-};
+   };
+})();

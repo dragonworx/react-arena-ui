@@ -25,11 +25,11 @@ export function Checkbox(props: CheckboxProps) {
          ref && ref.current.focus();
       }
       onClick && onClick(value);
-   
    };
+
    const onClicked = () => {
       onClick && onClick(value);
-   }
+   };
 
    const onRef = (ref: MutableRefObject<HTMLDivElement>) => setRef(ref);
 

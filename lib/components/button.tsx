@@ -17,6 +17,8 @@ interface BaseButtonProps {
    radius?: number;
    width?: string | number;
    height?: string | number;
+   useLayout?: boolean;
+   fillContent?: boolean;
    onClick?: () => void;
    onToggle?: (isToggled: boolean) => void;
    onRef?: (ref: MutableRefObject<HTMLDivElement>) => void;
@@ -27,7 +29,7 @@ export type ButtonProps = Omit<BaseButtonProps, 'className'>;
 const isAcceptKey = (e: KeyboardEvent) => e.keyCode === Keys.SPACE || e.keyCode === Keys.ENTER;
 
 export function Button(props: BaseButtonProps) {
-   const { children, type, className, toggle = false, isToggled: _isToggled = false, canUnToggle = true, reverse = false, onClick, onToggle, onRef } = props;
+   const { children, type, className, toggle = false, isToggled: _isToggled = false, canUnToggle = true, reverse = false, onClick, onToggle, onRef, useLayout = true } = props;
    const [isToggled, setIsToggled] = useState(_isToggled);
    const [isHover, setIsHover] = useState(false);
    const [isTempHover, setIsTempHover] = useState(false);
@@ -98,81 +100,89 @@ export function Button(props: BaseButtonProps) {
          tabIndex={0}
          data-arena={data}
       >
-         <HLayout padded align="center" justify="center" reverse={reverse}>{children}</HLayout>
+         {
+            useLayout
+               ? <HLayout padded align="center" justify="center" reverse={reverse}>{children}</HLayout>
+               : children
+         }
       </div>
    )
 }
 
 const useStyles = (props: BaseButtonProps) => {
-   const { padded = true, height = '100%' } = props;
-   return createUseStyles((theme: Theme) => ({
-      'button': {
-         position: 'relative',
-         borderRadius: props.radius ? props.radius : theme.borderRadius,
-         borderColor: theme.borderColor,
-         borderWidth: 1,
-         borderStyle: 'outset',
-         borderRight: `1px solid ${theme.borderColorLight}`,
-         borderBottom: `2px solid ${theme.borderColorDark}`,
-         padding: padded ? [theme.paddingSmall, theme.padding] : 0,
-         backgroundColor: props.bgColor ? [props.bgColor, '!important'] : theme.backgroundColor,
-         fontFamily: 'arena-regular',
-         fontSize: theme.fontSize,
-         color: props.color ? props.color : theme.textColor,
-         display: 'inline-block',
-         cursor: 'pointer',
-         userSelect: 'none',
-         boxSizing: 'border-box',
-         width: props.width,
-         height,
-         '&:focus': {
-            'outline': 0,
+   const { padded = true, height = '100%', fillContent = true } = props;
+   return createUseStyles((theme: Theme) => {   
+      const classes = {
+         'button': {
+            position: 'relative',
+            borderRadius: props.radius !== undefined ? props.radius : theme.borderRadius,
+            borderColor: theme.borderColor,
+            borderWidth: 1,
+            borderStyle: 'outset',
+            borderRight: `1px solid ${theme.borderColorLight}`,
+            borderBottom: `2px solid ${theme.borderColorDark}`,
+            padding: padded ? [theme.paddingSmall, theme.padding] : 0,
+            backgroundColor: props.bgColor ? [props.bgColor, '!important'] : theme.backgroundColor,
+            fontFamily: 'arena-regular',
+            fontSize: theme.fontSize,
+            color: props.color ? props.color : theme.textColor,
+            display: 'inline-block',
+            cursor: 'pointer',
+            userSelect: 'none',
+            boxSizing: 'border-box',
+            overflow: 'hidden',
+            width: props.width,
+            height: props.height ? props.height : height,
+            '&:focus': {
+               'outline': 0,
+            },
+            '&[data-arena*="hover-1"]': {
+               extend: 'over',
+            },
+            '&[data-arena*="down-1"]': {
+               extend: 'over',
+               borderColor: theme.borderColor,
+               backgroundColor: theme.backgroundColorDark,
+               '& > *': {
+                  transform: 'translate(1px ,1px)'
+               }
+            },
+            '&[data-arena*="toggled-1"]': {
+               extend: 'toggle',
+            },
+            '&[data-arena*="toggled-1"][data-arena*="hover-1"]': {
+               extend: 'toggle',
+               borderColor: theme.borderColorLight,
+               borderBottom: `2px solid ${theme.backgroundColor}`,
+            },
+            '&[data-arena*="toggled-1"][data-arena*="down-1"]': {
+               extend: 'toggle',
+               backgroundColor: theme.backgroundColorLight,
+            },
+            '&[data-arena*="focus-1"]': {
+               borderBottomColor: [theme.accentColor, '!important'],
+            },
          },
-         '& > *': {
+         'over': {
+            backgroundColor: theme.backgroundColorLight,
+            color: props.highlightColor ? props.highlightColor : theme.textColorLight,
+            borderColor: theme.borderColorLight,
+            borderBottom: `2px solid ${theme.backgroundColorDark}`,
+         },
+         'toggle': {
+            borderStyle: 'inset',
+            backgroundColor: theme.backgroundColorDark,
+            color: props.highlightColor ? props.highlightColor : theme.textColorLight,
+            borderColor: theme.borderColorDark,
+            borderBottom: `2px solid ${theme.backgroundColorDark}`,
+         },
+      };
+      if (fillContent) {
+         (classes as any).button['& > *'] = {
             width: '100%',
             height: '100%',
-         },
-         '&[data-arena*="hover-1"]': {
-            extend: 'over',
-         },
-         '&[data-arena*="down-1"]': {
-            extend: 'over',
-            borderColor: theme.borderColor,
-            backgroundColor: theme.backgroundColorDark,
-            '& > *': {
-               position: 'relative',
-               left: 1,
-               top: 1,
-            }
-         },
-         '&[data-arena*="toggled-1"]': {
-            extend: 'toggle',
-         },
-         '&[data-arena*="toggled-1"][data-arena*="hover-1"]': {
-            extend: 'toggle',
-            borderColor: theme.borderColorLight,
-            borderBottom: `2px solid ${theme.backgroundColor}`,
-         },
-         '&[data-arena*="toggled-1"][data-arena*="down-1"]': {
-            extend: 'toggle',
-            backgroundColor: theme.backgroundColorLight,
-         },
-         '&[data-arena*="focus-1"]': {
-            borderBottomColor: [theme.accentColor, '!important'],
-         },
-      },
-      'over': {
-         backgroundColor: theme.backgroundColorLight,
-         color: props.highlightColor ? props.highlightColor : theme.textColorLight,
-         borderColor: theme.borderColorLight,
-         borderBottom: `2px solid ${theme.backgroundColorDark}`,
-      },
-      'toggle': {
-         borderStyle: 'inset',
-         backgroundColor: theme.backgroundColorDark,
-         color: props.highlightColor ? props.highlightColor : theme.textColorLight,
-         borderColor: theme.borderColorDark,
-         borderBottom: `2px solid ${theme.backgroundColorDark}`,
-      },
-   }))();
+         };
+      }
+      return classes;
+   })();
 };

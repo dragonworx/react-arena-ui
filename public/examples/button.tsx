@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Button, Checkbox, Radio, HLayout, VLayout, RadioGroup, ExpandButton } from '~lib';
+import { Button, Checkbox, Radio, HLayout, VLayout, RadioGroup, ExpandButton, ToolButton, Label } from '~lib';
 import { LI } from './listItem';
 import { BoxSmall } from './box';
 
 const sample = require('../img/sample.png');
+const koala = require('../img/koala.jpeg');
 
 export function ButtonExamples() {
    return (
@@ -67,6 +68,13 @@ export function ButtonExamples() {
                <ExpandButton />
                <ExpandButton expanded={true} />
                <ExpandButton size={20} />
+            </HLayout>
+         </LI>
+         <LI label="Tool Button + Group">
+            <HLayout align="center">
+               <ToolButton><BoxSmall /></ToolButton>
+               <ToolButton size={27}><img src={koala} /></ToolButton>
+               <ToolButton size={40}><Label text="Tool" /></ToolButton>
             </HLayout>
          </LI>
       </ul>

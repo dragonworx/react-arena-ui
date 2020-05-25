@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useRef, UIEvent, useEffect } from 'react';
 import {
    ButtonExamples,
    LabelExamples,
@@ -23,6 +23,8 @@ interface ExamplesProps {
    onThemeChange: (themeName: string) => void;
 }
 
+let isTrackingScroll = false;
+
 export function Examples(props: ExamplesProps) {
    const { onThemeChange, theme } = props;
    const [selectedRoute, stSelectedRoute] = useState(window.location.hash.replace('#', ''));
@@ -44,28 +46,51 @@ export function Examples(props: ExamplesProps) {
       onThemeChange(e.target.value);
    };
 
+   const onScroll = (e: UIEvent) => {
+      if (!isTrackingScroll) {
+         return;
+      }
+      const el = document.getElementById('content') as HTMLDivElement;
+      const scrollTop = el.scrollTop;
+      localStorage['arena.examples.content.scrollTop'] = scrollTop;
+   };
+
+   useEffect(() => {
+      const delay = 100;
+      setTimeout(() => {
+         const scrollTop = localStorage['arena.examples.content.scrollTop'];
+         if (scrollTop !== undefined) {
+            const el = document.getElementById('content') as HTMLDivElement;
+            el.scrollTop = scrollTop;
+            setTimeout(() => {
+               isTrackingScroll = true;
+            }, delay);
+         }
+      }, delay);
+   }, []);
+
    return (
-         <div className={classes.app}>
-            <header>
-               React Arena UI Examples
+      <div className={classes.app}>
+         <header>
+            React Arena UI Examples
                <label>
-                  Theme:
+               Theme:
                   <select onChange={onThemeChanged} defaultValue={theme}>
-                     <option>default</option>
-                     <option>test</option>
-                  </select>
-               </label>
-            </header>
-            <div className={classes.examples}>
-               <ul className={classes.menu}>
-                  {
-                     Object.keys(Routes).map(route => link(route))
-                  }
-               </ul>
-               <div className={classes.content}>{content()}</div>
-            </div>
-            <footer>&copy; 2020 Ali Chamas</footer>
+                  <option>default</option>
+                  <option>test</option>
+               </select>
+            </label>
+         </header>
+         <div className={classes.examples}>
+            <ul className={classes.menu}>
+               {
+                  Object.keys(Routes).map(route => link(route))
+               }
+            </ul>
+            <div id="content" onScroll={onScroll} className={classes.content}>{content()}</div>
          </div>
+         <footer>&copy; 2020 Ali Chamas</footer>
+      </div>
    )
 }
 
@@ -200,6 +225,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
       height: '100%',
       overflow: 'auto',
       padding: theme.padding,
+      whiteSpace: 'nowrap',
 
       '& ul': {
          padding: 0,

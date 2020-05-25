@@ -118,7 +118,7 @@ export interface RadioGroupProps {
 }
 
 export function RadioGroup(props: RadioGroupProps) {
-   const { options, direction = 'vertical', position, onChange, defaultValue = null } = props;
+   const { options, direction = 'vertical', position = 'top', onChange, defaultValue = null } = props;
    const [ selectedValue, setSelectedValue ] = useState(defaultValue);
 
    const onLabelClick = (value: any) => () => onClick(value);
@@ -145,7 +145,7 @@ export function RadioGroup(props: RadioGroupProps) {
             <Radio 
                key={`radio-${i}-${value}`} 
                label={text} 
-               position={position || 'top'} 
+               position={position} 
                value={value} 
                onClick={onClick} 
                checked={selectedValue === value} 

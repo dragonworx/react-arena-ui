@@ -1,9 +1,9 @@
 * radio button groups ✅
-* tool buttons (groups)
+* tool buttons (groups) 🚧
 * grid layout
 * tooltips
 * link
-* expand button 🚧
+* expand button ✅
 * menu (dropdown, editable dropdown, popup menu, menu bar)
 * textField (placeholders, autocomplete)
 * scrollbars
