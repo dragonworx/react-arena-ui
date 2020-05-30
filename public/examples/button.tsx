@@ -9,6 +9,7 @@ import {
    ExpandButton,
    ToolButton,
    ToolButtonGroup,
+   Spacer,
 } from '~lib';
 import { LI } from './listItem';
 import { BoxSmall } from './box';
@@ -90,11 +91,12 @@ export function ButtonExamples() {
          </LI>
          <LI label="ToolButton + ToolButtonGroup">
             <HLayout align="center">
-               <ToolButton name="button1" iconSrc={sample} />
-               <ToolButton name="button2" iconSrc={koala} />
-               <ToolButton name="button3" isSelected={true} text="Tool" />
+               <ToolButton iconSrc={sample} />
+               <ToolButton iconSrc={koala} />
+               <ToolButton isSelected={true} text="Tool" />
+               <Spacer height={30} />
                <HLayout padded={false}>
-                  <ToolButtonGroup selected={1}>
+                  <ToolButtonGroup selected={1} onChange={(i, name) => console.log('ToggleButtonGroup.onChange!', i, name)}>
                      <ToolButton name="button1" iconSrc={sample} />
                      <ToolButton name="button2" iconSrc={koala} />
                      <ToolButton name="button3" text="Tool" />

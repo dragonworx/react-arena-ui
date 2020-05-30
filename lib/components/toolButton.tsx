@@ -14,7 +14,7 @@ import { Button } from './button';
 export interface ToolButtonProps {
    size?: number;
    text?: string;
-   name: string;
+   name?: string;
    iconSrc?: string;
    isSelected?: boolean;
    onToggle?: (isToggled: boolean, name?: string) => void;
@@ -87,15 +87,16 @@ const useStyles = (props: ToolButtonProps, arrowSize: number) => {
 export interface ToolButtonGroupProps {
    children: ReactElement<ToolButtonProps>[];
    selected?: number;
+   onChange?: (selectedIndex: number, selectedName?: string) => void;
 }
 
 export function ToolButtonGroup(props: ToolButtonGroupProps) {
-   const { children, selected: _selected } = props;
+   const { children, selected: _selected, onChange } = props;
    const [selected, setSelected] = useState(_selected);
 
    const onToggled = (i: number) => (isToggled: boolean, name?: string) => {
-      console.log(i)
       setSelected(i);
+      onChange && onChange(i, name);
    };
 
    return (
@@ -108,10 +109,24 @@ export function ToolButtonGroup(props: ToolButtonGroupProps) {
    )
 }
 
-const useGroupStyles = (props: ToolButtonGroupProps) => {
+export interface SpacerProps {
+   transparent?: boolean;
+   width?: number | string;
+   height?: number | string;
+}
+
+export function Spacer(props: SpacerProps) {
+   const classes = useLineStyles(props);
+   return <div className={classes.spacer}></div>;
+}
+
+const useLineStyles = (props: SpacerProps) => {
    return createUseStyles((theme: Theme) => ({
-      'toolButtonGroup': {
- 
+      'spacer': {
+         backgroundColor: props.transparent ? 'transparent' : theme.backgroundColor,
+         width: props.width || 4,
+         height: props.height || 4,
+         border: `1px inset ${theme.backgroundColorLight}`,
       },
    }))();
 };
