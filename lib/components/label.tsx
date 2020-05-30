@@ -99,6 +99,7 @@ export const alignToTextAlign = {
 export interface TitleProps {
    text: string;
    align?: 'left' | 'center' | 'right';
+   color?: string;
 }
 
 export function Title(props: TitleProps) {
@@ -117,7 +118,7 @@ const useTitleStyles = (props: TitleProps) => {
          textShadow: '0 3px 2px rgba(0,0,0,0.3)',
          marginBottom: theme.padding,
          display: 'block',
-         backgroundColor: theme.backgroundColorDark,
+         backgroundColor: props.color ? props.color : theme.backgroundColorDark,
          padding: '3px 7px',
          borderRadius: 5,
          borderBottom: `1px solid ${theme.accentColor}`,

@@ -104,20 +104,20 @@ const useRadioStyles = (props: RadioProps) => {
    }))();
 };
 
-export interface RadioGroupOption {
+export interface RadioGroupOption<T> {
    label: string;
-   value: any;
+   value: T;
 }
 
-export interface RadioGroupProps {
-   options: (RadioGroupOption | string)[];
+export interface RadioGroupProps<T> {
+   options: (RadioGroupOption<T> | string)[];
    direction?: Direction;
    position?: Position;
-   defaultValue?: any;
-   onChange?: (value: any) => void;
+   defaultValue?: T;
+   onChange?: (value: T) => void;
 }
 
-export function RadioGroup(props: RadioGroupProps) {
+export function RadioGroup(props: RadioGroupProps<any>) {
    const { options, direction = 'vertical', position = 'top', onChange, defaultValue = null } = props;
    const [ selectedValue, setSelectedValue ] = useState(defaultValue);
 
@@ -165,7 +165,7 @@ export function RadioGroup(props: RadioGroupProps) {
    )
 }
 
-const useRadioGroupStyles = (props: RadioGroupProps) => {
+const useRadioGroupStyles = (props: RadioGroupProps<any>) => {
    return createUseStyles((theme: Theme) => ({
       radioGroupVertical: {
          display: 'grid',

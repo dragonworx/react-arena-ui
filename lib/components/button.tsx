@@ -1,9 +1,20 @@
 import * as React from 'react';
 import { useState, ReactNode, useEffect, useRef, MutableRefObject } from 'react';
-import { css, useMouseUpEvent,useKeyDownEvent, useKeyUpEvent, Keys, HLayout, createUseStyles, Theme } from '~lib';
+import { 
+   css, 
+   useMouseUpEvent,
+   useKeyDownEvent, 
+   useKeyUpEvent, 
+   Keys, 
+   HLayout, 
+   createUseStyles, 
+   Theme,
+   important,
+} from '~lib';
 
 interface BaseButtonProps {
    children?: ReactNode;
+   name?: string;
    type?: string;
    className?: string;
    toggle?: boolean;
@@ -11,6 +22,7 @@ interface BaseButtonProps {
    isToggled?: boolean;
    reverse?: boolean;
    padded?: boolean;
+   padding?: number;
    color?: string;
    highlightColor?: string;
    bgColor?: string;
@@ -19,8 +31,8 @@ interface BaseButtonProps {
    height?: string | number;
    useLayout?: boolean;
    fillContent?: boolean;
-   onClick?: () => void;
-   onToggle?: (isToggled: boolean) => void;
+   onClick?: (name?: string) => void;
+   onToggle?: (isToggled: boolean, name?: string) => void;
    onRef?: (ref: MutableRefObject<HTMLDivElement>) => void;
 }
 
@@ -29,7 +41,20 @@ export type ButtonProps = Omit<BaseButtonProps, 'className'>;
 const isAcceptKey = (e: KeyboardEvent) => e.keyCode === Keys.SPACE || e.keyCode === Keys.ENTER;
 
 export function Button(props: BaseButtonProps) {
-   const { children, type, className, toggle = false, isToggled: _isToggled = false, canUnToggle = true, reverse = false, onClick, onToggle, onRef, useLayout = true } = props;
+   const { 
+      children, 
+      name,
+      type, 
+      className, 
+      toggle = false, 
+      isToggled: _isToggled = false, 
+      canUnToggle = true, 
+      reverse = false, 
+      onClick, 
+      onToggle, 
+      onRef, 
+      useLayout = true,
+   } = props;
    const [isToggled, setIsToggled] = useState(_isToggled);
    const [isHover, setIsHover] = useState(false);
    const [isTempHover, setIsTempHover] = useState(false);
@@ -47,14 +72,14 @@ export function Button(props: BaseButtonProps) {
    const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => setIsDown(true);
    const onMouseUp = (e: React.MouseEvent<HTMLDivElement>) => onUp();
    const onUp = () => {
-      onClick && onClick();
+      onClick && onClick(name);
       if (toggle) {
          const isNowToggled = !isToggled;
          if (isNowToggled === false && canUnToggle === false) {
             return;
          }
          setIsToggled(isNowToggled);
-         onToggle && onToggle(isNowToggled);
+         onToggle && onToggle(isNowToggled, name);
       }
    };
    const onFocus = (e: React.FocusEvent<HTMLDivElement>) => setIsFocus(true);
@@ -90,7 +115,7 @@ export function Button(props: BaseButtonProps) {
    return (
       <div
          ref={ref}
-         className={css(className, classes.button)}
+         className={css(classes.button, className)}
          onMouseOver={onMouseOver}
          onMouseOut={onMouseOut}
          onMouseDown={onMouseDown}
@@ -110,7 +135,7 @@ export function Button(props: BaseButtonProps) {
 }
 
 const useStyles = (props: BaseButtonProps) => {
-   const { padded = true, height = '100%', fillContent = true } = props;
+   const { padded = true, padding, height = '100%', fillContent = true } = props;
    return createUseStyles((theme: Theme) => {   
       const classes = {
          'button': {
@@ -121,8 +146,8 @@ const useStyles = (props: BaseButtonProps) => {
             borderStyle: 'outset',
             borderRight: `1px solid ${theme.borderColorLight}`,
             borderBottom: `2px solid ${theme.borderColorDark}`,
-            padding: padded ? [theme.paddingSmall, theme.padding] : 0,
-            backgroundColor: props.bgColor ? [props.bgColor, '!important'] : theme.backgroundColor,
+            padding: padded ? (typeof padding === 'number' ? padding : [theme.paddingSmall, theme.padding]) : 0,
+            backgroundColor: props.bgColor ? important(props.bgColor) : theme.backgroundColor,
             fontFamily: 'arena-regular',
             fontSize: theme.fontSize,
             color: props.color ? props.color : theme.textColor,
@@ -160,7 +185,7 @@ const useStyles = (props: BaseButtonProps) => {
                backgroundColor: theme.backgroundColorLight,
             },
             '&[data-arena*="focus-1"]': {
-               borderBottomColor: [theme.accentColor, '!important'],
+               borderBottomColor: important(theme.accentColor),
             },
          },
          'over': {

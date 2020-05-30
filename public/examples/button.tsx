@@ -1,5 +1,15 @@
 import * as React from 'react';
-import { Button, Checkbox, Radio, HLayout, VLayout, RadioGroup, ExpandButton, ToolButton, Label } from '~lib';
+import {
+   Button,
+   Checkbox,
+   Radio,
+   HLayout,
+   VLayout,
+   RadioGroup,
+   ExpandButton,
+   ToolButton,
+   ToolButtonGroup,
+} from '~lib';
 import { LI } from './listItem';
 import { BoxSmall } from './box';
 
@@ -10,7 +20,7 @@ export function ButtonExamples() {
    return (
       <ul>
          <LI label="Button" height={45}>
-            <Button onClick={() => console.log('Button Clicked!')}>Button (onClick)</Button>
+            <Button name="button1" onClick={name => console.log('Button Clicked!', name)}>Button (onClick)</Button>
             <Button><span>Button</span><BoxSmall /></Button>
             <Button padded={false} color="#666" highlightColor="#999" bgColor="white">
                <VLayout align="center" justify="center" imageSrc={sample} imageSize="cover" width={150} height="100%">
@@ -60,7 +70,15 @@ export function ButtonExamples() {
          <LI label="RadioGroup Horizontal" direction="horizontal">
             <HLayout>
                <RadioGroup options={['Top1', 'Top2', 'Top3']} direction="horizontal" />
-               <RadioGroup options={['Bottom1', 'Bottom2', 'Bottom3']} direction="horizontal" position="bottom" defaultValue="Bottom2" />
+               <RadioGroup options={['Bottom1', 'Bottom2', {
+                  label: 'Bottom3',
+                  value: 'Bottom3'
+               }]}
+                  direction="horizontal"
+                  position="bottom"
+                  defaultValue="Bottom2"
+                  onChange={(value: string) => console.log('RadioGroup.onChanged!', value)}
+               />
             </HLayout>
          </LI>
          <LI label="Expand Button">
@@ -70,11 +88,18 @@ export function ButtonExamples() {
                <ExpandButton size={20} />
             </HLayout>
          </LI>
-         <LI label="Tool Button + Group">
+         <LI label="ToolButton + ToolButtonGroup">
             <HLayout align="center">
-               <ToolButton><BoxSmall /></ToolButton>
-               <ToolButton size={27}><img src={koala} /></ToolButton>
-               <ToolButton size={40}><Label text="Tool" /></ToolButton>
+               <ToolButton name="button1" iconSrc={sample} />
+               <ToolButton name="button2" iconSrc={koala} />
+               <ToolButton name="button3" isSelected={true} text="Tool" />
+               <HLayout padded={false}>
+                  <ToolButtonGroup selected={1}>
+                     <ToolButton name="button1" iconSrc={sample} />
+                     <ToolButton name="button2" iconSrc={koala} />
+                     <ToolButton name="button3" text="Tool" />
+                  </ToolButtonGroup>
+               </HLayout>
             </HLayout>
          </LI>
       </ul>

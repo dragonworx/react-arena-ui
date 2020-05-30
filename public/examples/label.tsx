@@ -41,6 +41,7 @@ export function LabelExamples() {
             <Title text="Title (Default - Near):" />
             <Title text="Title (Center):" align="center" />
             <Title text="Title (Right):" align="right" />
+            <Title text="Title (Coloured):" color="blue" />
          </li>
       </ul>
    )
