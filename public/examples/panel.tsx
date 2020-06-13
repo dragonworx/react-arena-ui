@@ -85,7 +85,7 @@ export function PanelExamples() {
                      <span>Panel content...</span>
                   </VLayout>
                </Panel>
-               <Panel title="Gradient" padded={false} titleBg="#ccc" titleColor="black">
+               <Panel title="Gradient" padded={false} titleBg="#eee" titleColor="black">
                   <VLayout height="100%" innerPadding={true} gradientStart="white" gradientStop="black" color="black" gradientAngle={-90}>
                      <span>Panel content...</span>
                   </VLayout>

@@ -6,7 +6,7 @@ const balooBold = require('../../public/fonts/Baloo_Chettan_2/BalooChettan2-Bold
 
 export const defaultTheme = createTheme({
    buttonColor: '#787777',
-   backgroundColor: '#777',
+   backgroundColor: '#787878',
    borderRadius: 5,
    borderColor: '#ccc',
    textColor: '#ccc',

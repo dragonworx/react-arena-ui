@@ -149,7 +149,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
          padding: theme.paddingSmall,
          paddingBottom: theme.padding,
          borderRadius: theme.borderRadiusLarge,
-         backgroundColor: theme.accentColorDark,
+         background: `linear-gradient(180deg, ${theme.accentColorDark} 0, ${theme.backgroundColorDark} 100%)`,
          marginBottom: theme.padding,
          textAlign: 'center',
          fontSize: theme.fontSizeLarge,

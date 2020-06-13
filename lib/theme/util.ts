@@ -69,7 +69,7 @@ export const createTheme = (props: ThemeProps): Theme => {
       textColorDark: Color(props.textColor).darken(0.5).hex(),
       accentColorLight: Color(props.accentColor).lighten(0.2).desaturate(0.8).hex(),
       accentColor: props.accentColor,
-      accentColorDark: Color(props.accentColor).darken(0.2).desaturate(0.8).hex(),
+      accentColorDark: Color(props.accentColor).darken(0.3).desaturate(0.8).hex(),
       fontSizeSmall: Math.round(props.fontSize * 0.9),
       fontSize: props.fontSize,
       fontSizeLarge: Math.round(props.fontSize * 1.75),
