@@ -7,6 +7,9 @@ export interface FontFace {
 }
 
 export interface Theme {
+   buttonColorLight: string;
+   buttonColor: string;
+   buttonColorDark: string;
    backgroundColorLight: string;
    backgroundColor: string;
    backgroundColorDark: string;
@@ -31,7 +34,7 @@ export interface Theme {
    fonts?: FontFace[],
 }
 
-export type ThemeProps = Pick<Theme, 'backgroundColor' | 'borderRadius' | 'borderColor' | 'textColor' | 'accentColor' | 'fontSize' | 'padding' | 'accentColor' | 'fonts'>;
+export type ThemeProps = Pick<Theme, 'buttonColor' | 'backgroundColor' | 'borderRadius' | 'borderColor' | 'textColor' | 'accentColor' | 'fontSize' | 'padding' | 'accentColor' | 'fonts'>;
 
 export const css = (...classNames: (string | undefined)[]) => classNames.filter(className => !!className).join(' ');
 
@@ -46,6 +49,9 @@ export const fontFaces = (theme: Theme) => {
 
 export const createTheme = (props: ThemeProps): Theme => {
    return {
+      buttonColorLight: Color(props.buttonColor).lighten(0.1).hex(),
+      buttonColor: props.buttonColor,
+      buttonColorDark: Color(props.buttonColor).darken(0.2).hex(),
       backgroundColorLight: Color(props.backgroundColor).lighten(0.1).hex(),
       backgroundColor: props.backgroundColor,
       backgroundColorDark: Color(props.backgroundColor).darken(0.2).hex(),

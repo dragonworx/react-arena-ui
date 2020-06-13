@@ -34,7 +34,7 @@ const useStyles = (size: number) => {
          height: size,
          textAlign: 'center',
          '& svg': {
-            fill: theme.backgroundColorDark,
+            fill: theme.buttonColorDark,
             stroke: theme.borderColor,
             strokeWidth: 1,
             transform: 'rotateZ(90deg) scaleY(0.8)',

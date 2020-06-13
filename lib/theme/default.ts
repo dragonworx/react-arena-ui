@@ -5,6 +5,7 @@ const balooMedium = require('../../public/fonts/Baloo_Chettan_2/BalooChettan2-Me
 const balooBold = require('../../public/fonts/Baloo_Chettan_2/BalooChettan2-Bold.ttf');
 
 export const defaultTheme = createTheme({
+   buttonColor: '#787777',
    backgroundColor: '#777',
    borderRadius: 5,
    borderColor: '#ccc',

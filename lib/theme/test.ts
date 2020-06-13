@@ -5,6 +5,7 @@ const orbitronMedium = require('../../public/fonts/Orbitron/static/Orbitron-Medi
 const orbitronBold = require('../../public/fonts/Orbitron/static/Orbitron-Bold.ttf');
 
 export const testTheme = createTheme({
+   buttonColor: '#343333',
    backgroundColor: '#333',
    borderRadius: 5,
    borderColor: '#ccc',

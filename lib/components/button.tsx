@@ -147,7 +147,7 @@ const useStyles = (props: BaseButtonProps) => {
             borderRight: `1px solid ${theme.borderColorLight}`,
             borderBottom: `2px solid ${theme.borderColorDark}`,
             padding: padded ? (typeof padding === 'number' ? padding : [theme.paddingSmall, theme.padding]) : 0,
-            backgroundColor: props.bgColor ? important(props.bgColor) : theme.backgroundColor,
+            backgroundColor: props.bgColor ? important(props.bgColor) : theme.buttonColor,
             fontFamily: 'arena-regular',
             fontSize: theme.fontSize,
             color: props.color ? props.color : theme.textColor,
@@ -167,7 +167,7 @@ const useStyles = (props: BaseButtonProps) => {
             '&[data-arena*="down-1"]': {
                extend: 'over',
                borderColor: theme.borderColor,
-               backgroundColor: theme.backgroundColorDark,
+               backgroundColor: theme.buttonColorDark,
                '& > *': {
                   transform: 'translate(1px ,1px)'
                }
@@ -178,25 +178,25 @@ const useStyles = (props: BaseButtonProps) => {
             '&[data-arena*="toggled-1"][data-arena*="hover-1"]': {
                extend: 'toggle',
                borderColor: theme.borderColorLight,
-               borderBottom: `2px solid ${theme.backgroundColor}`,
+               borderBottom: `2px solid ${theme.buttonColor}`,
             },
             '&[data-arena*="toggled-1"][data-arena*="down-1"]': {
                extend: 'toggle',
-               backgroundColor: theme.backgroundColorLight,
+               backgroundColor: theme.buttonColorLight,
             },
             '&[data-arena*="focus-1"]': {
                borderBottomColor: important(theme.accentColor),
             },
          },
          'over': {
-            backgroundColor: theme.backgroundColorLight,
+            backgroundColor: theme.buttonColorLight,
             color: props.highlightColor ? props.highlightColor : theme.textColorLight,
             borderColor: theme.borderColorLight,
             borderBottom: `2px solid ${theme.backgroundColorDark}`,
          },
          'toggle': {
             borderStyle: 'inset',
-            backgroundColor: theme.backgroundColorDark,
+            backgroundColor: theme.buttonColorDark,
             color: props.highlightColor ? props.highlightColor : theme.textColorLight,
             borderColor: theme.borderColorDark,
             borderBottom: `2px solid ${theme.backgroundColorDark}`,
