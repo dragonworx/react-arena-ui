@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Panel, HLayout, VLayout } from '~lib';
-import { LI } from './listItem';
-import { BoxSmall, BoxMedium } from './box';
+import { Panel } from '../../lib/components/panel';
+import { HLayout, VLayout } from '../../lib/components/layout';
+import { LI } from './common/listItem';
+import { BoxSmall, BoxMedium } from './common/box';
 
 const sample = require('../img/koala.jpeg');
 const panelColor = '#4d4d6b';

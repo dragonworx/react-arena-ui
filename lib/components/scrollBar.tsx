@@ -2,11 +2,11 @@ import * as React from 'react';
 import { ReactNode, useState, useEffect, useRef } from 'react';
 import { Theme, createUseStyles, useTheme } from '../theme';
 
-export interface Props {
+export interface ScrollBarProps {
    children?: ReactNode;
 }
 
-export function Component(props: Props) {
+export function ScrollBar(props: ScrollBarProps) {
    const { children } = props;
 
    const classes = useStyles(props);
@@ -17,11 +17,9 @@ export function Component(props: Props) {
    )
 }
 
-const useStyles = (props: Props) => {
+const useStyles = (props: ScrollBarProps) => createUseStyles((theme: Theme) => {
    const {} = props;
-   return createUseStyles((theme: Theme) => {
-      return {
-   
-      };
-   })()
-};
+   return {
+
+   };
+})();

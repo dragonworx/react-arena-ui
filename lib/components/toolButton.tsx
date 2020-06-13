@@ -1,15 +1,9 @@
 import * as React from 'react';
-import { ReactNode, ReactElement, useState, useEffect, useRef } from 'react';
-import { 
-   Theme, 
-   createUseStyles, 
-   useTheme, 
-   Label, 
-   Position, 
-   withProps,
-   important,
-} from '~lib';
+import { ReactElement, useState } from 'react';
+import { Theme, createUseStyles, important, useTheme } from '../theme';
 import { Button } from './button';
+import { Label } from './label';
+import { withProps } from '../util';
 
 export interface ToolButtonProps {
    size?: number;

@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Label, Layout, Title } from '~lib';
-import { LI } from './listItem';
-import { BoxMedium } from './box';
+import { Label, Title } from '../../lib/components/label';
+import { Layout } from '../../lib/components/layout';
+import { LI } from './common/listItem';
+import { BoxMedium } from './common/box';
 
 export function LabelExamples() {
    return (

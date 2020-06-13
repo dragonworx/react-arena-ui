@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ReactNode, useState } from 'react';
-import { Theme, createUseStyles, useTheme, css } from '~lib';
+import { useState } from 'react';
+import { css, Theme, createUseStyles, useTheme } from '../theme';
 
 export interface ExpandButtonProps {
    size?: number;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
-import { Theme, createUseStyles } from '~lib';
+import { Theme, createUseStyles } from '../theme';
 
 export interface PanelProps {
    children?: ReactNode;

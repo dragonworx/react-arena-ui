@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useState, MutableRefObject } from 'react';
-import { Theme, createUseStyles, Label, Position, useTheme } from '~lib';
+import { Theme, createUseStyles, useTheme } from '../theme';
+import { Label } from './label';
+import { Position } from '../common';
 import { Button } from './button';
 
 export interface CheckboxProps {

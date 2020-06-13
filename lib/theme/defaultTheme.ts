@@ -1,4 +1,4 @@
-import { createTheme } from './util';
+import { createTheme } from '.';
 
 const balooRegular = require('../../public/fonts/Baloo_Chettan_2/BalooChettan2-Regular.ttf');
 const balooMedium = require('../../public/fonts/Baloo_Chettan_2/BalooChettan2-Medium.ttf');

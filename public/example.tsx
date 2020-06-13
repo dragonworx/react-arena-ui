@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { useState, useRef, UIEvent, useEffect } from 'react';
-import {
-   ButtonExamples,
-   LabelExamples,
-   LayoutExamples,
-   PanelExamples,
-
-} from './examples';
-import { Theme, createUseStyles, fontFaces } from '~lib';
+import { useState, UIEvent, useEffect } from 'react';
+import { ButtonExamples } from './examples/button';
+import { LabelExamples } from './examples/label';
+import { LayoutExamples } from './examples/layout';
+import { PanelExamples } from './examples/panel';
+import { ScrollBarExamples } from './examples/scrollBar';
+import { Theme, createUseStyles, fontFaces } from '../lib/theme';
 
 const sample = require('./img/sample.png');
 
@@ -16,6 +14,7 @@ const Routes = {
    'panel': PanelExamples,
    'label': LabelExamples,
    'button': ButtonExamples,
+   'scrollbar': ScrollBarExamples,
 } as any;
 
 interface ExamplesProps {

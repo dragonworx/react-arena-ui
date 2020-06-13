@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Layout, Title } from '~lib';
+import { Layout } from '../../../lib/components/layout';
+import { Title } from '../../../lib/components/label';
 
 export interface ListItemProps {
    children: React.ReactNode;

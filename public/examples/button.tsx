@@ -1,18 +1,12 @@
 import * as React from 'react';
-import {
-   Button,
-   Checkbox,
-   Radio,
-   HLayout,
-   VLayout,
-   RadioGroup,
-   ExpandButton,
-   ToolButton,
-   ToolButtonGroup,
-   Spacer,
-} from '~lib';
-import { LI } from './listItem';
-import { BoxSmall } from './box';
+import { Button } from '../../lib/components/button';
+import { Checkbox } from '../../lib/components/checkbox';
+import { Radio, RadioGroup } from '../../lib/components/radio';
+import { HLayout, VLayout } from '../../lib/components/layout';
+import { ExpandButton } from '../../lib/components/expandButton';
+import { ToolButton, ToolButtonGroup, Spacer } from '../../lib/components/toolButton';
+import { LI } from './common/listItem';
+import { BoxSmall } from './common/box';
 
 const sample = require('../img/sample.png');
 const koala = require('../img/koala.jpeg');

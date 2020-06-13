@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useState, useRef, useEffect } from 'react';
-import { useInterval } from './hooks';
-import { transformedLocalCoord } from './util';
+import { useState, useRef } from 'react';
+import { useInterval } from '../hooks';
+import { transformedLocalCoord } from '../util';
 
 export interface SpriteProps {
    className?: string;

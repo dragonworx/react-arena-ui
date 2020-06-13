@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { defaultTheme, testTheme, ThemeProvider, Theme } from '~lib';
+import { ThemeProvider, Theme } from '../lib/theme';
+import { defaultTheme } from '../lib/theme/defaultTheme';
+import { altTheme } from '../lib/theme/altTheme';
+
 import { Examples } from './example';
 
 const themes = {
    'default': defaultTheme,
-   'test': testTheme,
+   'alt': altTheme,
 } as {
    [key: string]: Theme;
 };

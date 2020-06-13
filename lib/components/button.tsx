@@ -1,16 +1,8 @@
 import * as React from 'react';
 import { useState, ReactNode, useEffect, useRef, MutableRefObject } from 'react';
-import { 
-   css, 
-   useMouseUpEvent,
-   useKeyDownEvent, 
-   useKeyUpEvent, 
-   Keys, 
-   HLayout, 
-   createUseStyles, 
-   Theme,
-   important,
-} from '~lib';
+import { HLayout } from '../components/layout';
+import { css, Theme, createUseStyles, important } from '../theme';
+import { useMouseUpEvent, useKeyDownEvent, useKeyUpEvent, Keys } from '../hooks';
 
 interface BaseButtonProps {
    children?: ReactNode;

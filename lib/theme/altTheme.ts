@@ -1,10 +1,10 @@
-import { createTheme } from './util';
+import { createTheme } from '.';
 
 const orbitronRegular = require('../../public/fonts/Orbitron/static/Orbitron-Regular.ttf');
 const orbitronMedium = require('../../public/fonts/Orbitron/static/Orbitron-Medium.ttf');
 const orbitronBold = require('../../public/fonts/Orbitron/static/Orbitron-Bold.ttf');
 
-export const testTheme = createTheme({
+export const altTheme = createTheme({
    buttonColor: '#333',
    backgroundColor: '#444',
    borderRadius: 5,

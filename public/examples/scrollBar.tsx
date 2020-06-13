@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { Button } from '../../lib/components/button';
+import { ScrollBar } from '../../lib/components/scrollBar';
 import { HLayout, VLayout } from '../../lib/components/layout';
 import { LI } from './common/listItem';
 
-export function ButtonExamples() {
+export function ScrollBarExamples() {
    return (
       <ul>
          <LI label="Default">
             <HLayout>
-               <Button />
+               <ScrollBar />
             </HLayout>
          </LI>
       </ul>

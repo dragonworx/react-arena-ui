@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Label, HLayout, VLayout } from '~lib';
-import { LI } from './listItem';
-import { BoxSmall, BoxMedium, BoxLarge } from './box';
+import { Label } from '../../lib/components/label';
+import { HLayout, VLayout } from '../../lib/components/layout';
+import { LI } from './common/listItem';
+import { BoxSmall, BoxMedium, BoxLarge } from './common/box';
 
 const padding = 30;
 

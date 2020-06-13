@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
-import { Theme, createUseStyles, Align, Direction, css } from '~lib';
+import { Align, Direction } from '../common';
+import { css, Theme, createUseStyles } from '../theme';
 
 export interface LayoutProps {
    children?: ReactNode;

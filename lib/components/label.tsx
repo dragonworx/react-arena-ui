@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
 import { Layout } from './layout';
-import { Theme, createUseStyles, Position, Align } from '~lib';
+import { Theme, createUseStyles } from '../theme';
+import { Position, Align } from '../common';
 
 export interface LabelProps {
    children?: ReactNode;
